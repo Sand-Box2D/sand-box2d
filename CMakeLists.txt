@@ -25,9 +25,6 @@ elseif(BUILD_MACOS)
     message(STATUS "Building for macOS")
     add_definitions(-DBUILD_MACOS)
 
-    set(CMAKE_C_COMPILER "/usr/bin/gcc")
-    set(CMAKE_CXX_COMPILER "/usr/bin/g++")
-
     project(${GAME_NAME})
 
 elseif(BUILD_VITA)

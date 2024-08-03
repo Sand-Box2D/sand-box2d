@@ -22,6 +22,9 @@ game-manager.cpp
 
 Classnames:
 ```cpp
+#pragma once  // Generally recommended to leave at all the header files
+              // (instead of #define #ifdef ... #endif).
+
 class GameManager;
 ```
 
@@ -117,7 +120,7 @@ inside `/src/platform` (we'll use `module`).
 It should declare the basic functions we would expect from each platform
 (like create directories, init renderer,
 get state of the "button" that moves camera up).
-Refer to conventions above for more details how to declare them properly.
+Refer to conventions above for more details how to declare these properly.
 4. When header file is declared, create a **new directory** in the module folder.
 We generally expect it to be named `module-platform`
 where platform describes where this directory should be compiled
@@ -129,7 +132,10 @@ please describe **difference** between other implementations.
 7. Add other header/source files inside that dir if needed.
 8. When finished, ensure you have implementations working on **all the platforms**.
 9. Open [`CMakeLists.txt`](/CMakeLists.txt) file
-and link the **base header file** for **all the platforms**
-while linking the **implementation folder** manually for **each platform**.
-10. Document your contribution inside the [`platforms.md`](/docs/platforms.md) file.
-Use existing entries as an example for adding a new one.
+and link the **base header file for all the platforms**
+while linking the **implementation folder manually for each platform**.
+10. Please specify the list of platforms this implementation is intended for
+(like "all the PC builds" for Windows, Linux and macOS)
+at the end of the description.
+11. This information itself should be enough to be self-explainable.
+It could go as the documentation for all the different platforms.

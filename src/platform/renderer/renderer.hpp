@@ -4,7 +4,7 @@
  * @brief Renderer class implements basic functions of a renderer environment.
  * 
  * It initializes the window and its renderer, lets you get/set resolution and,
- * most importantly, provides you with the basic rendering functions
+ * most importantly, provides you the basic rendering functions
  * such as "render this texture there with this angle".
  * 
  * It could be implemented differently on different platforms.
