@@ -37,7 +37,7 @@ elseif(BUILD_VITA)
     project(${GAME_NAME})
 
 else()
-    message(STATUS "Please specify the build platform")
+    message(STATUS "Please specify the build platform.")
 
 endif()
 
