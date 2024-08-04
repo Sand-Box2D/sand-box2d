@@ -7,3 +7,12 @@
  * You could render all the objects by calling `render()` method on all the Physians.
  * Concrete objects would pick up their own render method implementations.
  */
+
+class BasePhysian
+{
+public:
+    BasePhysian();
+    ~BasePhysian();
+private:
+    /* data */
+};

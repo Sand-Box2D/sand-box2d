@@ -8,7 +8,7 @@ Here's the list of them:
 * [macOS](./macos.md).
 
 ## Detailed List of Platforms
-This list will contain more info regarding each platform to navigate quickly.
+This list contains more info regarding each platform to navigate quickly.
 
 ### PS Vita
 * Build option: `BUILD_VITA`.
@@ -35,7 +35,7 @@ Read more [here](./vita.md).
 * Build doc: [`windows.md`](./windows.md).
 * Settings file: `windows.json`.
 
-The default build option.
+The default build option in CMake.
 
 Build is performed with MSYS2 UCRT64 tools.
 Read more [here](./windows.md).
