@@ -11,6 +11,9 @@
  * For now, only SDL2 renderer is implemented.
  */
 
+/// @brief Declaration of platform-specific Renderer data.
+struct RendererSpecific;
+
 /// @brief Mode of the renderer window (fullscreen or not or etc.).
 enum RendererMode
 {
@@ -43,10 +46,10 @@ struct RendererParams
 /// @brief Little struct representing a color with an alpha channel.
 struct RendererColor
 {
-    const char red = (char)0;       // Quantity of the red color (0-255).
-    const char green = (char)0;     // Quantity of the green color (0-255).
-    const char blue = (char)0;      // Quantity of the blue color (0-255).
-    const char alpha = (char)255;   // Alpha channel (opacity) (0-255).
+    const unsigned char red = (char)0;      // Quantity of the red color (0-255).
+    const unsigned char green = (char)0;    // Quantity of the green color (0-255).
+    const unsigned char blue = (char)0;     // Quantity of the blue color (0-255).
+    const unsigned char alpha = (char)0xFF; // Alpha channel (opacity) (0-255).
 };
 
 /**
@@ -111,19 +114,26 @@ public:
     /// @brief Swap the renderer buffer and show everything that was rendered.
     void render();
 
-protected:
+private:
+    /// @brief Pointer to platform-specific Renderer data.
+    RendererSpecific *mp_Specific;
+
     /// @brief Is the renderer inited and ready to use?
     bool m_IsInited;
 
     /// @brief Quantity of frames that were rendered since the renderer init.
     unsigned long int m_Frames;
 
-    /// @brief Current size of the physical renderer window. 0 by default when not inited.
+    /// @brief Current size of the physical renderer window.
+    ///
+    /// 0 by default when not inited.
     ///
     /// Note `m_Scale`.
     int m_WindowWidth, m_WindowHeight;
 
-    /// @brief Current size of the game environment. 0 by default when not inited.
+    /// @brief Current size of the game environment.
+    ///
+    /// 0 by default when not inited.
     ///
     /// Note `m_Scale`.
     int m_GameWidth, m_GameHeight;

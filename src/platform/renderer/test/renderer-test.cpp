@@ -10,6 +10,9 @@
  * 
  * This is a throw-off placeholder copy of SDL2 Renderer impl.
  * to see if it won't compile (normally it doesn't).
+ * 
+ * You shouldn't open such a file with your IDE as you'll see
+ * a lot of errors.
  */
 
 /// @brief Window for the SDL2 Renderer impl.
