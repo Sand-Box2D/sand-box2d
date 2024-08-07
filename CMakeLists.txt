@@ -11,8 +11,7 @@ file(GLOB_RECURSE SRC_MAIN "src/main*[.hpp|.cpp]")
 file(GLOB_RECURSE SRC_SYSTEM "src/system/*[.hpp|.cpp]")
 file(GLOB_RECURSE SRC_MODELS "src/models/*[.hpp|.cpp]")
 
-# Do I even have to link the header???
-set(HPP_PLATFORM_RENDERER "src/platform/renderer/renderer.hpp")
+include_directories(${CMAKE_SOURCE_DIR})
 
 if(BUILD_WINDOWS)
     message(STATUS "Building for Windows")
@@ -34,17 +33,15 @@ elseif(BUILD_MACOS)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
-    file(GLOB_RECURSE SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
 
     add_executable(${CMAKE_PROJECT_NAME}
-        ${HPP_PLATFORM_RENDERER}
+        ${SRC_MAIN}
         ${SRC_SYSTEM}
         ${SRC_MODELS}
         ${SRC_PLATFORM_RENDERER_SDL2}
-        ${SRC_MAIN}
     )
 
-    target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "src/platform/renderer/sdl2")
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "/opt/homebrew/include")
 
     find_library(SDL2_LIBS sdl2)

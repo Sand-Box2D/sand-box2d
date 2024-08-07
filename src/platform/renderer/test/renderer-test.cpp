@@ -6,15 +6,10 @@
 #include <SDL2/SDL.h>
 
 /**
- * @brief SDL2 Implementation for Renderer.
+ * @brief Test Implementation for Renderer.
  * 
- * Implements a renderer with SDL2 window and its SDL2_renderer.
- * 
- * This way, we use SDL2 functions to render textures
- * or more graphical stuff with SDL2_gfx.
- * 
- * For the moment, it's the only renderer implementation for the game
- * (bare GLFW / OpenGL and Metal implementations might appear later).
+ * This is a throw-off placeholder copy of SDL2 Renderer impl.
+ * to see if it won't compile (normally it doesn't).
  */
 
 /// @brief Window for the SDL2 Renderer impl.
@@ -25,6 +20,12 @@ SDL_Renderer *mp_Renderer;
 
 Renderer::Renderer()
 {
+    // I'll do some gibberish to see what happens
+    eirhbfieurbfiuerhfeijebnrf();
+    OOIIOFIJOP@EF OI#@JFOIF;
+    Iufnorfmmf
+    FUEYCUHE_EFWIHBEFE__ EFEWFEWFWEFWEFRWEFWEF'''
+
     mp_Window = nullptr;
     mp_Renderer = nullptr;
 

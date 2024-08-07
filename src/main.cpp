@@ -2,13 +2,16 @@
 
 int main()
 {
-    std::unique_ptr<BaseRenderer> renderer = std::make_unique<RendererSdl2>();
+    auto renderer = Renderer();
 
-    renderer->init();
+    return 0;   // I mean, it's cool if you can compile.
+                // But please, don't launch me.
+
+    renderer.init();
 
     while (true)
     {
-        renderer->clearScreen({0x10, 0x10, 0x10});
-        renderer->render();
+        renderer.clearScreen({0x10, 0x10, 0x10});
+        renderer.render();
     }
 }

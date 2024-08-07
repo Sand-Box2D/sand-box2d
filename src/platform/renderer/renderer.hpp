@@ -27,11 +27,13 @@ struct RendererParams
     /// => `{1280:720} * 1.5 = {1920:1080}`
     float scale = 1;
 
-    /// @brief Desired mode of the renderer window
-    /// (see enum RendererMode).
+    /// @brief Desired mode of the renderer window.
+    ///
+    /// (See enum RendererMode).
     RendererMode renderer_mode = RR_MODE_FULLSCREEN;
 
     /// @brief Desired size of the physical renderer window in pixels.
+    ///
     /// If you go fullscreen, leave 0 as renderer will occupy the whole screen anyway.
     ///
     /// The game resolution will get smaller if you provide a scale >1.
@@ -48,7 +50,7 @@ struct RendererColor
 };
 
 /**
- * @brief Renderer implementation.
+ * @brief Renderer of the game.
  * 
  * Refer to the current platform source .cpp file to know which implementation this is.
  * 
@@ -56,55 +58,58 @@ struct RendererColor
  * passing the `rendererParams` struct if you need to overwrite default params
  * (that is, software fullscreen window. You pass the struct to launch in a window for example).
  */
-class BaseRenderer
+class Renderer
 {
 public:
-    virtual ~BaseRenderer() {};
+    Renderer();
+    ~Renderer();
 
     /// @brief Init the graphical environment (create a window and its renderer).
     /// @param rendererParams RendererParams to overwrite if needed.
     /// @return True if could init correctly. False if not.
-    virtual bool init(RendererParams rendererParams = RendererParams()) = 0;
+    bool init(RendererParams rendererParams = RendererParams());
 
     /// @brief Set the new renderer params when need to update.
     ///
     /// It won't init the renderer. Call `init()` instead.
     /// @param rendererParams New RendererParams.
-    virtual void setParams(RendererParams rendererParams) = 0;
+    void setParams(RendererParams rendererParams);
 
     /// @brief Get current width of the game env in pixels.
+    ///
     /// Game window might be bigger though. Refer to `getScale()`.
     ///
     /// Still, you need to consider this resolution when rendering.
     /// @return 0 if didn't yet init renderer.
-    virtual int getWidth() = 0;
+    int getWidth();
 
     /// @brief Get current height of the game env in pixels.
+    ///
     /// Game window might be bigger though. Refer to `getScale()`.
     ///
     /// Still, you need to consider this resolution when rendering.
     /// @return 0 if didn't yet init renderer.
-    virtual int getHeight() = 0;
+    int getHeight();
 
     /// @brief Get a value that gives the physical size of the renderer window when
     /// multiplied with the game env size (`getWidth()` and `getHeight()`).
     /// @return 0 if didn't yet init renderer.
-    virtual float getScale() = 0;
+    float getScale();
 
     /// @brief Get time between two renders in milliseconds.
     /// @return 0 if didn't yet init renderer.
-    virtual float getDelta() = 0;
+    float getDelta();
 
     /// @brief Get rendered frames count since the renderer init.
     /// @return 0 if didn't yet init renderer.
-    virtual unsigned long int getFrames() = 0;
+    unsigned long int getFrames();
 
     /// @brief Fill the whole screen with a single color.
     /// @param color Desired color of the screen (background even).
-    virtual void clearScreen(RendererColor color) = 0;
+    void clearScreen(RendererColor color);
 
     /// @brief Swap the renderer buffer and show everything that was rendered.
-    virtual void render() = 0;
+    void render();
 
 protected:
     /// @brief Is the renderer inited and ready to use?
