@@ -19,7 +19,7 @@ We generally expect it to be named `platform`
 where platform describes where this directory should be compiled
 (for example, "std" for modern C++ and "vita" for PS Vita specifically).
 5. Create a **source file** inside that dir which includes the base header file
-and realizes it (we'll use `module-platform.cpp`).
+named as the module and realizes it (we'll use `module.cpp`).
 6. As of [comment convention](./comments.md) p.2,
 please describe **difference** between other implementations.
 7. Add other header/source files inside that dir if needed.

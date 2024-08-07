@@ -21,15 +21,15 @@
 struct RendererSpecific
 {
     /// @brief Window for the SDL2 Renderer impl.
-    SDL_Window *window = nullptr;
+    SDL_Window *p_window = nullptr;
 
     /// @brief Renderer for this SDL2 impl.
-    SDL_Renderer *renderer = nullptr;
+    SDL_Renderer *p_renderer = nullptr;
 };
 
 Renderer::Renderer()
 {
-    Renderer::mp_Specific = new RendererSpecific();
+    Renderer::mp_Specific = std::make_unique<RendererSpecific>();
 
     Renderer::m_IsInited = false;
     Renderer::m_Frames = 0;
@@ -47,10 +47,8 @@ Renderer::~Renderer()
     if (!Renderer::m_IsInited)
         return;
 
-    SDL_DestroyRenderer(Renderer::mp_Specific->renderer);
-    SDL_DestroyWindow(Renderer::mp_Specific->window);
-
-    delete Renderer::mp_Specific;
+    SDL_DestroyRenderer(Renderer::mp_Specific->p_renderer);
+    SDL_DestroyWindow(Renderer::mp_Specific->p_window);
 }
 
 bool Renderer::init(RendererParams rendererParams)
@@ -62,22 +60,45 @@ bool Renderer::init(RendererParams rendererParams)
 
         SDL_Init(SDL_INIT_EVERYTHING);
 
+        SDL_DisplayMode display_mode;
+        SDL_GetCurrentDisplayMode(0, &display_mode);
+
         switch (rendererParams.renderer_mode)
         {
-        case RR_MODE_FULLSCREEN:
-            SDL_DisplayMode dm;
-            SDL_GetCurrentDisplayMode(0, &dm);
+        case RR_MODE_FULLSCREEN_SOFT:
+            Renderer::m_WindowWidth = display_mode.w;
+            Renderer::m_WindowHeight = display_mode.h;
 
-            Renderer::m_WindowWidth = dm.w;
-            Renderer::m_WindowHeight = dm.h;
-
-            Renderer::mp_Specific->window = SDL_CreateWindow(
+            Renderer::mp_Specific->p_window = SDL_CreateWindow(
                 "Sand-Box2D",
                 0,
                 0,
                 Renderer::m_WindowWidth,
                 Renderer::m_WindowHeight,
-                SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_INPUT_GRABBED | SDL_WINDOW_ALLOW_HIGHDPI
+                SDL_WINDOW_FULLSCREEN_DESKTOP
+                    | SDL_WINDOW_INPUT_GRABBED
+                    | SDL_WINDOW_ALLOW_HIGHDPI
+            );
+
+            break;
+
+        case RR_MODE_FULLSCREEN_HARD:
+            Renderer::m_WindowWidth = rendererParams.width == 0
+                ? display_mode.w
+                : rendererParams.width;
+            Renderer::m_WindowHeight = rendererParams.height == 0
+                ? display_mode.h
+                : rendererParams.height;
+
+            Renderer::mp_Specific->p_window = SDL_CreateWindow(
+                "Sand-Box2D",   // je fais expres de hardcoder celui-ci mdr
+                0,
+                0,
+                Renderer::m_WindowWidth,
+                Renderer::m_WindowHeight,
+                SDL_WINDOW_FULLSCREEN
+                    | SDL_WINDOW_INPUT_GRABBED
+                    | SDL_WINDOW_ALLOW_HIGHDPI
             );
 
             break;
@@ -86,7 +107,7 @@ bool Renderer::init(RendererParams rendererParams)
             Renderer::m_WindowWidth = rendererParams.width;
             Renderer::m_WindowHeight = rendererParams.height;
 
-            Renderer::mp_Specific->window = SDL_CreateWindow(
+            Renderer::mp_Specific->p_window = SDL_CreateWindow(
                 "Sand-Box2D",
                 0,
                 0,
@@ -106,25 +127,29 @@ bool Renderer::init(RendererParams rendererParams)
         Renderer::m_GameWidth = Renderer::m_WindowWidth / Renderer::m_Scale;
         Renderer::m_GameHeight = Renderer::m_WindowHeight / Renderer::m_Scale;
 
-        Renderer::mp_Specific->renderer = SDL_CreateRenderer(
-            Renderer::mp_Specific->window,
+        Renderer::mp_Specific->p_renderer = SDL_CreateRenderer(
+            Renderer::mp_Specific->p_window,
             -1,
             SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
         );
 
         SDL_SetWindowSize(
-            Renderer::mp_Specific->window,
+            Renderer::mp_Specific->p_window,
             Renderer::m_WindowWidth,
             Renderer::m_WindowHeight
         );
         SDL_RenderSetLogicalSize(
-            Renderer::mp_Specific->renderer,
+            Renderer::mp_Specific->p_renderer,
             Renderer::m_WindowWidth,
             Renderer::m_WindowHeight
         );
 
         if (rendererParams.renderer_mode == RR_MODE_WINDOW)
-            SDL_SetWindowPosition(Renderer::mp_Specific->window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+            SDL_SetWindowPosition(
+                Renderer::mp_Specific->p_window,
+                SDL_WINDOWPOS_CENTERED,
+                SDL_WINDOWPOS_CENTERED
+            );
 
         Renderer::m_IsInited = true;
         return true;
@@ -141,16 +166,34 @@ void Renderer::setParams(RendererParams rendererParams)
     if (!Renderer::m_IsInited)
         return;
 
+    SDL_DisplayMode display_mode;
+    SDL_GetCurrentDisplayMode(0, &display_mode);
+
     switch (rendererParams.renderer_mode)
     {
-    case RR_MODE_FULLSCREEN:
-        SDL_DisplayMode dm;
-        SDL_GetCurrentDisplayMode(0, &dm);
+    case RR_MODE_FULLSCREEN_SOFT:
+        Renderer::m_WindowWidth = display_mode.w;
+        Renderer::m_WindowHeight = display_mode.h;
 
-        Renderer::m_WindowWidth = dm.w;
-        Renderer::m_WindowHeight = dm.h;
+        SDL_SetWindowFullscreen(
+            Renderer::mp_Specific->p_window,
+            SDL_WINDOW_FULLSCREEN_DESKTOP
+        );
 
-        SDL_SetWindowFullscreen(Renderer::mp_Specific->window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+        break;
+
+    case RR_MODE_FULLSCREEN_HARD:
+        Renderer::m_WindowWidth = rendererParams.width == 0
+            ? display_mode.w
+            : rendererParams.width;
+        Renderer::m_WindowHeight = rendererParams.height == 0
+            ? display_mode.h
+            : rendererParams.height;
+
+        SDL_SetWindowFullscreen(
+            Renderer::mp_Specific->p_window,
+            SDL_WINDOW_FULLSCREEN
+        );
 
         break;
 
@@ -158,7 +201,7 @@ void Renderer::setParams(RendererParams rendererParams)
         Renderer::m_WindowWidth = rendererParams.width;
         Renderer::m_WindowHeight = rendererParams.height;
 
-        SDL_SetWindowFullscreen(Renderer::mp_Specific->window, 0);
+        SDL_SetWindowFullscreen(Renderer::mp_Specific->p_window, 0);
 
         break;
 
@@ -172,18 +215,22 @@ void Renderer::setParams(RendererParams rendererParams)
     Renderer::m_GameHeight = Renderer::m_WindowHeight / Renderer::m_Scale;
 
     SDL_SetWindowSize(
-        Renderer::mp_Specific->window,
+        Renderer::mp_Specific->p_window,
         Renderer::m_WindowWidth,
         Renderer::m_WindowHeight
     );
     SDL_RenderSetLogicalSize(
-        Renderer::mp_Specific->renderer,
+        Renderer::mp_Specific->p_renderer,
         Renderer::m_WindowWidth,
         Renderer::m_WindowHeight
     );
 
     if (rendererParams.renderer_mode == RR_MODE_WINDOW)
-        SDL_SetWindowPosition(Renderer::mp_Specific->window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+        SDL_SetWindowPosition(
+            Renderer::mp_Specific->p_window,
+            SDL_WINDOWPOS_CENTERED,
+            SDL_WINDOWPOS_CENTERED
+        );
 }
 
 int Renderer::getWidth()
@@ -215,16 +262,16 @@ unsigned long int Renderer::getFrames()
 void Renderer::clearScreen(RendererColor color)
 {
     SDL_SetRenderDrawColor(
-        Renderer::mp_Specific->renderer,
+        Renderer::mp_Specific->p_renderer,
         color.red,
         color.green,
         color.blue,
         color.alpha
     );
-    SDL_RenderClear(Renderer::mp_Specific->renderer);
+    SDL_RenderClear(Renderer::mp_Specific->p_renderer);
 }
 
 void Renderer::render()
 {
-    SDL_RenderPresent(Renderer::mp_Specific->renderer);
+    SDL_RenderPresent(Renderer::mp_Specific->p_renderer);
 }

@@ -12,7 +12,7 @@
  * to see if it won't compile (normally it doesn't).
  * 
  * You shouldn't open such a file with your IDE as you'll see
- * a lot of errors.
+ * a lot of errors (that's sort of an example of a real code for another platform).
  */
 
 /// @brief Window for the SDL2 Renderer impl.

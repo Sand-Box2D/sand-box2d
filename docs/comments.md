@@ -11,7 +11,8 @@ It should describe the following:
   * If you need to do something other and/or specific to make this object **usable**.
   If yes, explain what to do and under which condition
   (for example, call `init()` when renderer is ready).
-  * If an object of this class should be created as a **pointer**. If so, why.
+  * If an object of this class should be created **in the heap** (as a pointer).
+  If so, why.
 4. Each method of the class should have
 a **full Doxygen-like description** in the header file
 (brief, optional full, describe all the arguments and return value).

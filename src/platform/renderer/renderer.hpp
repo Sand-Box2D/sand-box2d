@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 /**
  * @brief Renderer class implements basic functions of a renderer environment.
  * 
@@ -17,8 +19,9 @@ struct RendererSpecific;
 /// @brief Mode of the renderer window (fullscreen or not or etc.).
 enum RendererMode
 {
-    RR_MODE_FULLSCREEN = 0, // Renderer opens in fullscreen. Provided resolution is ignored.
-    RR_MODE_WINDOW          // Renderer opens a window instead. Its resolution must be defined.
+    RR_MODE_FULLSCREEN_SOFT = 0,    // Renderer opens a window that's fullscreen. Provided resolution is ignored.
+    RR_MODE_FULLSCREEN_HARD,        // Renderer opens in real fullscreen. You can force resolution if needed.
+    RR_MODE_WINDOW                  // Renderer opens a window instead. Its resolution must be defined.
 };
 
 /// @brief Various params to set for the renderer environment such as resolution.
@@ -33,11 +36,15 @@ struct RendererParams
     /// @brief Desired mode of the renderer window.
     ///
     /// (See enum RendererMode).
-    RendererMode renderer_mode = RR_MODE_FULLSCREEN;
+    RendererMode renderer_mode = RR_MODE_FULLSCREEN_SOFT;
 
     /// @brief Desired size of the physical renderer window in pixels.
     ///
-    /// If you go fullscreen, leave 0 as renderer will occupy the whole screen anyway.
+    /// - If you go to soft fullscreen, leave 0 as renderer will occupy the whole screen anyway.
+    ///
+    /// - If you go to hard fullscreen, leaving 0 means taking the screen resolution, but you can force another.
+    ///
+    /// - If you go to window, you have to define a resolution.
     ///
     /// The game resolution will get smaller if you provide a scale >1.
     int width = 0, height = 0;
@@ -116,7 +123,7 @@ public:
 
 private:
     /// @brief Pointer to platform-specific Renderer data.
-    RendererSpecific *mp_Specific;
+    std::unique_ptr<RendererSpecific> mp_Specific;
 
     /// @brief Is the renderer inited and ready to use?
     bool m_IsInited;

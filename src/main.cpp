@@ -4,12 +4,9 @@ int main()
 {
     auto renderer = Renderer();
 
-    renderer.init();
+    renderer.init({1, RR_MODE_WINDOW, 1920/2, 1080/2});
 
-    return 0;   // I mean, it's cool if you can compile.
-                // But please, don't launch the loop.
-
-    while (true)
+    for (int i = 0; i < 2000; i++)  // A cheap way to close the game
     {
         renderer.clearScreen({0, 0, 0xFF});
         renderer.render();
