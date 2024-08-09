@@ -8,10 +8,9 @@ option(BUILD_VITA "Build PS Vita .vpk" OFF)
 set(GAME_NAME "Sand-Box2D")
 
 file(GLOB_RECURSE SRC_MAIN "src/main*[.hpp|.cpp]")
+file(GLOB_RECURSE SRC_MANAGER "src/game-manager*[.hpp|.cpp]")
 file(GLOB_RECURSE SRC_SYSTEM "src/system/*[.hpp|.cpp]")
 file(GLOB_RECURSE SRC_MODELS "src/models/*[.hpp|.cpp]")
-
-include_directories(${CMAKE_SOURCE_DIR})
 
 if(BUILD_WINDOWS)
     message(STATUS "Building for Windows")
@@ -38,6 +37,7 @@ elseif(BUILD_MACOS)
 
     add_executable(${CMAKE_PROJECT_NAME}
         ${SRC_MAIN}
+        ${SRC_MANAGER}
         ${SRC_SYSTEM}
         ${SRC_MODELS}
         ${SRC_PLATFORM_RENDERER_SDL2}
