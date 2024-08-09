@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-option(BUILD_WINDOWS "Build Windows .exe" ON) # Default. Windows means using MSYS2 / UCRT tools
+option(BUILD_WINDOWS "Build Windows .exe" ON) # Default. Windows means using MSYS/UCRT tools
 option(BUILD_LINUX "Build Linux executable" OFF)
 option(BUILD_MACOS "Build macOS executable" OFF)
 option(BUILD_VITA "Build PS Vita .vpk" OFF)
@@ -34,12 +34,14 @@ elseif(BUILD_MACOS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
     file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
 
     add_executable(${CMAKE_PROJECT_NAME}
         ${SRC_MAIN}
         ${SRC_SYSTEM}
         ${SRC_MODELS}
         ${SRC_PLATFORM_RENDERER_SDL2}
+        ${SRC_PLATFORM_CONTROLS_SDL2}
     )
 
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "/opt/homebrew/include")

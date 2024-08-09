@@ -15,11 +15,29 @@
  * Like this, it's very easy to handle keyups/keydowns `(now && !old)`.
  */
 
+/// @brief Class allowing you to access currently pressed buttons.
+///
+/// When created, Controls does nothing.
+/// You have to call `check()` to query pressed buttons.
+/// You can then access their states by calling various methods of this class.
 class Controls
 {
 public:
     Controls();
     ~Controls();
+
+    /// @brief Query pressed buttons.
+    ///
+    /// This puts their states to private variables of this object
+    /// you can access with public methods.
+    void check();
+
+    /// @brief Get state of the action telling game to close.
+    ///
+    /// Has to be handled.
+    /// @return True if game has to be closed now.
+    bool getQuit();
 private:
-    /* data */
+    /// @brief State of the action telling game to close.
+    bool isQuit;
 };

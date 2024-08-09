@@ -3,12 +3,15 @@
 int main()
 {
     auto renderer = Renderer();
+    auto ctrl = Controls();
 
-    renderer.init();
+    renderer.init({1, RR_MODE_WINDOW, 960, 544});
 
-    for (int i = 0; i < 1000; i++)  // A cheap way to close the game
+    do
     {
-        renderer.clearScreen({0, 0, 0xFF});
+        ctrl.check();
+
+        renderer.clearScreen({0x40, 0x40, 0x40});
         renderer.render();
-    }
+    } while (!ctrl.getQuit());
 }

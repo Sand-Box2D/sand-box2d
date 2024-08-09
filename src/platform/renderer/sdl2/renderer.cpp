@@ -76,7 +76,6 @@ bool Renderer::init(RendererParams rendererParams)
                 Renderer::m_WindowWidth,
                 Renderer::m_WindowHeight,
                 SDL_WINDOW_FULLSCREEN_DESKTOP
-                    | SDL_WINDOW_INPUT_GRABBED
                     | SDL_WINDOW_ALLOW_HIGHDPI
             );
 
@@ -97,7 +96,6 @@ bool Renderer::init(RendererParams rendererParams)
                 Renderer::m_WindowWidth,
                 Renderer::m_WindowHeight,
                 SDL_WINDOW_FULLSCREEN
-                    | SDL_WINDOW_INPUT_GRABBED
                     | SDL_WINDOW_ALLOW_HIGHDPI
             );
 
@@ -113,7 +111,7 @@ bool Renderer::init(RendererParams rendererParams)
                 0,
                 Renderer::m_WindowWidth,
                 Renderer::m_WindowHeight,
-                SDL_WINDOW_INPUT_GRABBED | SDL_WINDOW_ALLOW_HIGHDPI
+                SDL_WINDOW_ALLOW_HIGHDPI
             );
 
             break;

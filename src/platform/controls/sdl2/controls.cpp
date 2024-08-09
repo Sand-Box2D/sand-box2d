@@ -1,10 +1,41 @@
 #include "../controls.hpp"
 
+#include <SDL2/SDL.h>
+
 /**
  * @brief SDL2 Implementation for Controls.
  * 
- * Uses SDL2 input handling in cooperation with SDL2 Renderer implementation
- * in order to know which keys are pressed or which buttons are tapped with SDL2_joystick.
+ * Uses SDL2 input handling poll system
+ * in order to know which keys are pressed or which buttons are tapped with SDL2_Controller.
  * 
  * Used in all the PC builds.
  */
+
+Controls::Controls()
+{
+    Controls::isQuit = false;
+}
+Controls::~Controls() {}
+
+void Controls::check()
+{
+    SDL_Event event;
+
+    while (SDL_PollEvent(&event))
+    {
+        switch (event.type)
+        {
+        case SDL_QUIT:
+            Controls::isQuit = true;
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+
+bool Controls::getQuit()
+{
+    return Controls::isQuit;
+}
