@@ -14,4 +14,4 @@ and in order to effectively use the fact that we're refactoring the full project
 these strong rules were defined. Please refer to them when contributing.
 
 * [Naming Conventions](./naming.md) - various conventions for naming files/classes/etc.
-* [Comment Conventions](./comments.md) - conventions about commenting your code.
+* [Commenting Conventions](./commenting.md) - conventions about commenting your code.

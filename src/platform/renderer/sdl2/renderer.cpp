@@ -248,8 +248,8 @@ float Renderer::getScale()
 
 float Renderer::getDelta()
 {
-    const float placeholder_delta = 16.6; // TODO
-    return placeholder_delta;
+    const float PLACEHOLDER_DATA = 16.6; // TODO
+    return PLACEHOLDER_DATA;
 }
 
 unsigned long int Renderer::getFrames()

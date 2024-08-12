@@ -11,6 +11,9 @@
  * Used in all the PC builds.
  */
 
+/// @brief SDL2 Controls specific data.
+struct ControlsSpecific {};
+
 Controls::Controls()
 {
     Controls::isQuit = false;

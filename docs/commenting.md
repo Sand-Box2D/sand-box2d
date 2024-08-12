@@ -1,4 +1,4 @@
-# Sand-Box2D Comment Conventions
+# Sand-Box2D Commenting Conventions
 1. Each **header** file should have a **detailed description**
 about what it is and what it can do.
 2. If header file can have **multiple** C++ implementations on different platforms

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 /**
  * @brief Controls class provides you the state of the pressed "buttons" in game.
  * 
@@ -14,6 +16,9 @@
  * one showing the state of controls in this frame and another in the previous.
  * Like this, it's very easy to handle keyups/keydowns `(now && !old)`.
  */
+
+/// @brief Declaration of platform-specific Controls data.
+struct ControlsSpecific;
 
 /// @brief Class allowing you to access currently pressed buttons.
 ///
@@ -37,7 +42,16 @@ public:
     /// Has to be handled.
     /// @return True if game has to be closed now.
     bool getQuit();
+
 private:
+    /// @brief Pointer to platform-specific Controls data.
+    ///
+    /// TODO: Normally, this should be an unique_ptr.
+    /// But in my usecase, it's simpler to leave shared_ptr
+    /// because it doesn't allow me to init the object in a "copy" way.
+    /// Is there a better way maybe?
+    std::shared_ptr<ControlsSpecific> mp_Specific;
+
     /// @brief State of the action telling game to close.
     bool isQuit;
 };

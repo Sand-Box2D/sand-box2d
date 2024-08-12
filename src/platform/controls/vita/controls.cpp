@@ -1,7 +1,7 @@
 #include "../controls.hpp"
 
 /**
- * @brief SDL2 Implementation for PS Vita.
+ * @brief PS Vita Implementation for Controls.
  * 
  * Uses native PS Vita functions to know which buttons are pressed.
  * 
