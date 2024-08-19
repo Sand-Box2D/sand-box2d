@@ -50,7 +50,7 @@ cmake .. -G "MinGW Makefiles"
 make -j4
 ```
 
-3. Normally, you should have a new `Sand-Box2D` executable you can run with:
+3. Normally, you should have a new .exe file named `Sand-Box2D.exe` you can run with:
 ```bash
 .\Sand-Box2D.exe
 ```
