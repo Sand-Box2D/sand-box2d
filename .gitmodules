@@ -1,4 +1,5 @@
 [submodule "imgui"]
+	branch = master
 	path = src/lib/imgui
 	url = https://github.com/sand-box2d/imgui
 	shallow = true
