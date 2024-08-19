@@ -107,8 +107,8 @@ bool Renderer::init(RendererParams rendererParams)
 
             Renderer::mp_Specific->p_window = SDL_CreateWindow(
                 "Sand-Box2D",
-                0,
-                0,
+                SDL_WINDOWPOS_CENTERED,
+                SDL_WINDOWPOS_CENTERED,
                 Renderer::m_WindowWidth,
                 Renderer::m_WindowHeight,
                 SDL_WINDOW_ALLOW_HIGHDPI
@@ -131,23 +131,11 @@ bool Renderer::init(RendererParams rendererParams)
             SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
         );
 
-        SDL_SetWindowSize(
-            Renderer::mp_Specific->p_window,
-            Renderer::m_WindowWidth,
-            Renderer::m_WindowHeight
-        );
         SDL_RenderSetLogicalSize(
             Renderer::mp_Specific->p_renderer,
             Renderer::m_WindowWidth,
             Renderer::m_WindowHeight
         );
-
-        if (rendererParams.renderer_mode == RR_MODE_WINDOW)
-            SDL_SetWindowPosition(
-                Renderer::mp_Specific->p_window,
-                SDL_WINDOWPOS_CENTERED,
-                SDL_WINDOWPOS_CENTERED
-            );
 
         Renderer::m_IsInited = true;
         return true;
