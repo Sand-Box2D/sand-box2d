@@ -10,14 +10,16 @@ First, let's review list of dependencies that are required for Sand-Box2D to run
 2. **Dear ImGui**. Library providing an easy access to draw some windows inside the game.
 It's an internal lib, meaning that its code is cloned locally and compiled alongside the game.
 
+Also note that game is compiled with the Apple's Clang compiler from dev tools.
+
 ## Prerequisites
 Let's prepare our dev environment by installing all the tools we need.
 
 1. Ensure you have [Brew](https://brew.sh) installed as well as
 Apple's dev tools (Clang compiler and Git).
-2. Install dependencies and CMake with Brew:
+2. Install CMake and dependencies with Brew:
 ```bash
-brew install sdl2 cmake
+brew install cmake sdl2
 ```
 
 ## Compile
