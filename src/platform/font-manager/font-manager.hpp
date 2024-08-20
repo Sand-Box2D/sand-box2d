@@ -1,3 +1,5 @@
+/// @brief Platform-specific module of the font manager. See class `FontManager`.
+
 #pragma once
 
 /**

@@ -1,3 +1,5 @@
+/// @brief This provides a declaration of the main class of the game, `GameManager`.
+
 #pragma once
 
 #include "platform/renderer/renderer.hpp"

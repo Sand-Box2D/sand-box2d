@@ -1,3 +1,5 @@
+/// @brief This provides an implementation of a scene, `SceneMain`.
+
 #pragma once
 
 #include "scene.hpp"

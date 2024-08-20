@@ -1,3 +1,5 @@
+/// @brief Platform-specific module of Dear ImGui manager. See class `ImGuiManager`.
+
 #pragma once
 
 #include "../../lib/imgui/imgui.h"

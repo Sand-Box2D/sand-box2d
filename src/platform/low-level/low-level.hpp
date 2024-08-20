@@ -1,3 +1,6 @@
+/// @brief Platform-specific module of the low-level operations.
+/// See class `LowLevel`.
+
 #pragma once
 
 /**

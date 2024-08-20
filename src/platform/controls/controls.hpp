@@ -1,3 +1,5 @@
+/// @brief Platform-specific module of controls. See class `Controls`.
+
 #pragma once
 
 #include <memory>

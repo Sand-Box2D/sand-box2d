@@ -1,3 +1,5 @@
+/// @brief Platform-specific module of the renderer backend. See class `Renderer`.
+
 #pragma once
 
 #include <memory>

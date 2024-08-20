@@ -1,3 +1,5 @@
+/// @brief This provides the interface of a scene, `IScene`.
+
 #pragma once
 
 enum Scene
