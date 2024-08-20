@@ -29,7 +29,7 @@ struct RendererSpecific
 
 Renderer::Renderer()
 {
-    Renderer::mp_Specific = std::make_unique<RendererSpecific>();
+    Renderer::mp_Specific = std::make_shared<RendererSpecific>();
 
     Renderer::m_IsInited = false;
     Renderer::m_Frames = 0;

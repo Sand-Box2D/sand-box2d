@@ -98,7 +98,7 @@ struct RendererSpecific
 which *might* be the simpler solution with other forward-declared types as for SDL2).
 Load:
 ```cpp
-Renderer::mp_Specific = std::make_unique<RendererSpecific>();
+Renderer::mp_Specific = std::make_shared<RendererSpecific>();
 
 // ...
 
