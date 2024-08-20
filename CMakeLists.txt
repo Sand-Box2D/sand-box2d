@@ -147,7 +147,53 @@ elseif(BUILD_VITA)
     message(STATUS "Building for PS Vita")
     add_definitions(-DBUILD_VITA)
 
+    if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+        if(DEFINED ENV{VITASDK})
+            set(CMAKE_TOOLCHAIN_FILE "$ENV{VITASDK}/share/vita.toolchain.cmake" CACHE PATH "toolchain file")
+        else()
+            message(FATAL_ERROR "Please define VITASDK to point to your SDK path!")
+        endif()
+    endif()
+
     project(${GAME_NAME})
+    include("${VITASDK}/share/vita.cmake" REQUIRED)
+
+    set(VITA_APPNAME "Sand-Box2D")
+    set(VITA_TITLEID "SANDBOX2D")
+    set(VITA_VERSION "01.00")
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")    # Use C++ version 17
+
+    set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
+
+    file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
+
+    add_executable(${CMAKE_PROJECT_NAME}
+        ${SRC_MAIN}
+        ${SRC_MANAGER}
+
+        ${SRC_SYSTEM}
+        ${SRC_MODELS}
+
+        ${SRC_PLATFORM_RENDERER_SDL2}
+        ${SRC_PLATFORM_CONTROLS_SDL2}
+    )
+
+    find_package(SDL2)
+
+    target_link_libraries(${CMAKE_PROJECT_NAME}
+        SDL2::SDL2
+    )
+
+    vita_create_self(${CMAKE_PROJECT_NAME}.self ${CMAKE_PROJECT_NAME})
+
+    vita_create_vpk(${CMAKE_PROJECT_NAME}.vpk ${VITA_TITLEID} ${CMAKE_PROJECT_NAME}.self
+        VERSION ${VITA_VERSION}
+        NAME ${VITA_APPNAME}
+
+        FILE assets assets
+    )
 
 else()
     message(STATUS "Please specify the build platform.")
