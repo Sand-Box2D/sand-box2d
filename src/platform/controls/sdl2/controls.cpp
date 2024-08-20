@@ -1,7 +1,3 @@
-#include "../controls.hpp"
-
-#include <SDL2/SDL.h>
-
 /**
  * @brief SDL2 Implementation for Controls.
  * 
@@ -10,6 +6,10 @@
  * 
  * Used in all the PC builds.
  */
+
+#include "../controls.hpp"
+
+#include <SDL2/SDL.h>
 
 /// @brief SDL2 Controls specific data.
 struct ControlsSpecific {};

@@ -1,10 +1,3 @@
-#include "../renderer.hpp"
-
-#include <iostream>
-#include <stdexcept>
-
-#include <SDL2/SDL.h>
-
 /**
  * @brief SDL2 Implementation for Renderer.
  * 
@@ -16,6 +9,13 @@
  * For the moment, it's the only renderer implementation for the game
  * (GLFW / bare OpenGL and Metal implementations might appear later).
  */
+
+#include "../renderer.hpp"
+
+#include <iostream>
+#include <stdexcept>
+
+#include <SDL2/SDL.h>
 
 /// @brief SDL2 Renderer impl. specific data.
 struct RendererSpecific

@@ -1,5 +1,3 @@
-#include "../low-level.hpp"
-
 /**
  * @brief PS Vita implementation for low-level OS functions.
  * 
@@ -8,3 +6,5 @@
  * 
  * Will (and has to) compile to PS Vita only.
  */
+
+#include "../low-level.hpp"

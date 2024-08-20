@@ -1,5 +1,3 @@
-#include "../controls.hpp"
-
 /**
  * @brief PS Vita Implementation for Controls.
  * 
@@ -7,3 +5,5 @@
  * 
  * Used only in PS Vita build.
  */
+
+#include "../controls.hpp"

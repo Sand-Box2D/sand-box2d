@@ -1,5 +1,3 @@
-#include "../low-level.hpp"
-
 /**
  * @brief Standard C++ implementation for low-level OS functions.
  * 
@@ -8,3 +6,5 @@
  * 
  * Should be able to compile and run on all the platforms with few exceptions.
  */
+
+#include "../low-level.hpp"
