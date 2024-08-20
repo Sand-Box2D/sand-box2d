@@ -84,7 +84,7 @@ public:
     ///
     /// Game window might be bigger though. Refer to `getScale()`.
     ///
-    /// Still, you need to consider this resolution when rendering.
+    /// Still, you need to consider *this* resolution when rendering.
     /// @return 0 if didn't yet init renderer.
     int getWidth();
 
@@ -92,13 +92,13 @@ public:
     ///
     /// Game window might be bigger though. Refer to `getScale()`.
     ///
-    /// Still, you need to consider this resolution when rendering.
+    /// Still, you need to consider *this* resolution when rendering.
     /// @return 0 if didn't yet init renderer.
     int getHeight();
 
     /// @brief Get a value that gives the physical size of the renderer window when
     /// multiplied with the game env size (`getWidth()` and `getHeight()`).
-    /// @return 0 if didn't yet init renderer.
+    /// @return 1 if didn't yet init renderer.
     float getScale();
 
     /// @brief Get time between two renders in milliseconds.
