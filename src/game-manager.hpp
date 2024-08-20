@@ -12,31 +12,30 @@
 /// @brief Manager of the entirety of the game.
 ///
 /// When created, GM sets everything up but does nothing.
-/// In order to tell it to "run the game", call `cycle()`.
+/// In order to tell it to "run the game", call `step()` and then `render()` in the loop
+/// (e.g. `while (gm.step()) {gm.render();}`).
 class GameManager
 {
 public:
     GameManager();
     ~GameManager();
 
-    /// @brief Launch the game main cycle.
-    void cycle();
-private:
     /// @brief Make a logical step of the game.
     ///
     /// It will decide which scene should be executed.
     /// For more info refer to `models/scenes/scene.hpp`.
     /// @return False when game has to be closed now.
-    bool m_step();
+    bool step();
 
     /// @brief Render current scene.
-    void m_render();
+    void render();
 
+private:
     /// @brief Renderer of the game.
     ///
     /// Renderer is a class which represents basic renderer functions.
     /// To know more about it, see class `Renderer`.
-    Renderer m_Renderer;
+    Renderer m_Renderer = Renderer({1, RR_MODE_WINDOW, 960, 544});
 
     /// @brief Object providing state of the currently pressed buttons.
     Controls m_Controls;

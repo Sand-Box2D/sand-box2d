@@ -14,10 +14,7 @@
 /// @brief SDL2 Controls specific data.
 struct ControlsSpecific {};
 
-Controls::Controls()
-{
-    Controls::isQuit = false;
-}
+Controls::Controls() {}
 Controls::~Controls() {}
 
 void Controls::check()

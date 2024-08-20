@@ -45,13 +45,8 @@ public:
 
 private:
     /// @brief Pointer to platform-specific Controls data.
-    ///
-    /// TODO: Normally, this should be an unique_ptr.
-    /// But in my usecase, it's simpler to leave shared_ptr
-    /// because it doesn't allow me to init the object in a "copy" way.
-    /// Is there a better way maybe?
     std::shared_ptr<ControlsSpecific> mp_Specific;
 
     /// @brief State of the action telling game to close.
-    bool isQuit;
+    bool isQuit = false;
 };

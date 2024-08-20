@@ -13,16 +13,13 @@
 
 /// @brief Class managing the Dear ImGui for you.
 ///
-/// When created, manager does nothing.
-/// To init Dear ImGui, call `init()` passing your Renderer object.
+/// When created, manager inits Dear ImGui and binds it to your renderer.
 class ImGuiManager
 {
 public:
-    ImGuiManager();
-    ~ImGuiManager();
-
     /// @brief Init manager of the Dear ImGui.
     /// @param r_renderer Your referenced Renderer object
-    /// is required to init Dear ImGui.
-    void init(Renderer *r_renderer);
+    /// is required to init Dear ImGui. 
+    ImGuiManager(Renderer &r_renderer);
+    ~ImGuiManager();
 };

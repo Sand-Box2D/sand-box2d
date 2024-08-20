@@ -27,20 +27,90 @@ struct RendererSpecific
     SDL_Renderer *p_renderer = nullptr;
 };
 
-Renderer::Renderer()
+Renderer::Renderer(RendererParams rendererParams)
 {
-    Renderer::mp_Specific = std::make_shared<RendererSpecific>();
+    Renderer::mp_Specific = std::make_unique<RendererSpecific>();
 
-    Renderer::m_IsInited = false;
-    Renderer::m_Frames = 0;
+    SDL_Init(SDL_INIT_EVERYTHING);
 
-    Renderer::m_WindowWidth = 0;
-    Renderer::m_WindowHeight = 0;
+    SDL_DisplayMode display_mode;
+    SDL_GetCurrentDisplayMode(0, &display_mode);
 
-    Renderer::m_GameWidth = 0;
-    Renderer::m_GameHeight = 0;
+    switch (rendererParams.renderer_mode)
+    {
+    case RR_MODE_FULLSCREEN_SOFT:
+        Renderer::m_WindowWidth = display_mode.w;
+        Renderer::m_WindowHeight = display_mode.h;
 
-    Renderer::m_Scale = 0;
+        Renderer::mp_Specific->p_window = SDL_CreateWindow(
+            "Sand-Box2D",
+            0,
+            0,
+            Renderer::m_WindowWidth,
+            Renderer::m_WindowHeight,
+            SDL_WINDOW_FULLSCREEN_DESKTOP
+                | SDL_WINDOW_ALLOW_HIGHDPI
+        );
+
+        break;
+
+    case RR_MODE_FULLSCREEN_HARD:
+        Renderer::m_WindowWidth = rendererParams.width == 0
+            ? display_mode.w
+            : rendererParams.width;
+        Renderer::m_WindowHeight = rendererParams.height == 0
+            ? display_mode.h
+            : rendererParams.height;
+
+        Renderer::mp_Specific->p_window = SDL_CreateWindow(
+            "Sand-Box2D",   // je fais expres de hardcoder celui-ci mdr
+            0,
+            0,
+            Renderer::m_WindowWidth,
+            Renderer::m_WindowHeight,
+            SDL_WINDOW_FULLSCREEN
+                | SDL_WINDOW_ALLOW_HIGHDPI
+        );
+
+        break;
+
+    case RR_MODE_WINDOW:
+        Renderer::m_WindowWidth = rendererParams.width;
+        Renderer::m_WindowHeight = rendererParams.height;
+
+        Renderer::mp_Specific->p_window = SDL_CreateWindow(
+            "Sand-Box2D",
+            SDL_WINDOWPOS_CENTERED,
+            SDL_WINDOWPOS_CENTERED,
+            Renderer::m_WindowWidth,
+            Renderer::m_WindowHeight,
+            SDL_WINDOW_ALLOW_HIGHDPI
+        );
+
+        break;
+
+    default:
+        throw std::invalid_argument("Please select the renderer mode!");
+    }
+
+    Renderer::m_Scale = rendererParams.scale;
+
+    Renderer::m_GameWidth = Renderer::m_WindowWidth / Renderer::m_Scale;
+    Renderer::m_GameHeight = Renderer::m_WindowHeight / Renderer::m_Scale;
+
+    Renderer::mp_Specific->p_renderer = SDL_CreateRenderer(
+        Renderer::mp_Specific->p_window,
+        -1,
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+    );
+
+    SDL_RenderSetLogicalSize(
+        Renderer::mp_Specific->p_renderer,
+        Renderer::m_WindowWidth,
+        Renderer::m_WindowHeight
+    );
+
+    Renderer::m_IsInited = true;
 }
 Renderer::~Renderer()
 {
@@ -49,102 +119,8 @@ Renderer::~Renderer()
 
     SDL_DestroyRenderer(Renderer::mp_Specific->p_renderer);
     SDL_DestroyWindow(Renderer::mp_Specific->p_window);
-}
 
-bool Renderer::init(RendererParams rendererParams)
-{
-    try
-    {
-        Renderer::m_IsInited = false;
-        Renderer::m_Frames = 0;
-
-        SDL_Init(SDL_INIT_EVERYTHING);
-
-        SDL_DisplayMode display_mode;
-        SDL_GetCurrentDisplayMode(0, &display_mode);
-
-        switch (rendererParams.renderer_mode)
-        {
-        case RR_MODE_FULLSCREEN_SOFT:
-            Renderer::m_WindowWidth = display_mode.w;
-            Renderer::m_WindowHeight = display_mode.h;
-
-            Renderer::mp_Specific->p_window = SDL_CreateWindow(
-                "Sand-Box2D",
-                0,
-                0,
-                Renderer::m_WindowWidth,
-                Renderer::m_WindowHeight,
-                SDL_WINDOW_FULLSCREEN_DESKTOP
-                    | SDL_WINDOW_ALLOW_HIGHDPI
-            );
-
-            break;
-
-        case RR_MODE_FULLSCREEN_HARD:
-            Renderer::m_WindowWidth = rendererParams.width == 0
-                ? display_mode.w
-                : rendererParams.width;
-            Renderer::m_WindowHeight = rendererParams.height == 0
-                ? display_mode.h
-                : rendererParams.height;
-
-            Renderer::mp_Specific->p_window = SDL_CreateWindow(
-                "Sand-Box2D",   // je fais expres de hardcoder celui-ci mdr
-                0,
-                0,
-                Renderer::m_WindowWidth,
-                Renderer::m_WindowHeight,
-                SDL_WINDOW_FULLSCREEN
-                    | SDL_WINDOW_ALLOW_HIGHDPI
-            );
-
-            break;
-
-        case RR_MODE_WINDOW:
-            Renderer::m_WindowWidth = rendererParams.width;
-            Renderer::m_WindowHeight = rendererParams.height;
-
-            Renderer::mp_Specific->p_window = SDL_CreateWindow(
-                "Sand-Box2D",
-                SDL_WINDOWPOS_CENTERED,
-                SDL_WINDOWPOS_CENTERED,
-                Renderer::m_WindowWidth,
-                Renderer::m_WindowHeight,
-                SDL_WINDOW_ALLOW_HIGHDPI
-            );
-
-            break;
-
-        default:
-            throw std::invalid_argument("Please select the renderer mode!");
-        }
-
-        Renderer::m_Scale = rendererParams.scale;
-
-        Renderer::m_GameWidth = Renderer::m_WindowWidth / Renderer::m_Scale;
-        Renderer::m_GameHeight = Renderer::m_WindowHeight / Renderer::m_Scale;
-
-        Renderer::mp_Specific->p_renderer = SDL_CreateRenderer(
-            Renderer::mp_Specific->p_window,
-            -1,
-            SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
-        );
-
-        SDL_RenderSetLogicalSize(
-            Renderer::mp_Specific->p_renderer,
-            Renderer::m_WindowWidth,
-            Renderer::m_WindowHeight
-        );
-
-        Renderer::m_IsInited = true;
-        return true;
-    }
-    catch (const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-        return false;
-    }
+    SDL_Quit();
 }
 
 void Renderer::setParams(RendererParams rendererParams)

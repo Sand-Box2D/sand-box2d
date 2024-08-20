@@ -64,24 +64,19 @@ struct RendererColor
  * 
  * Refer to the current platform source .cpp file to know which implementation this is.
  * 
- * When created, Renderer does nothing. To init the graphics environment, call `init()`
- * passing the `rendererParams` struct if you need to overwrite default params
+ * When created, Renderer inits the graphics environment and you'll have to
+ * pass the `rendererParams` struct if you need to overwrite default params of the window/renderer
  * (that is, software fullscreen window. You pass the struct to launch in a window for example).
  */
 class Renderer
 {
 public:
-    Renderer();
+    /// @brief Init the graphical environment (create a window and its renderer).
+    /// @param rendererParams RendererParams to create a window/renderer with.
+    Renderer(RendererParams rendererParams = RendererParams());
     ~Renderer();
 
-    /// @brief Init the graphical environment (create a window and its renderer).
-    /// @param rendererParams RendererParams to overwrite if needed.
-    /// @return True if could init correctly. False if not.
-    bool init(RendererParams rendererParams = RendererParams());
-
     /// @brief Set the new renderer params when need to update.
-    ///
-    /// It won't init the renderer. Call `init()` instead.
     /// @param rendererParams New RendererParams.
     void setParams(RendererParams rendererParams);
 
@@ -123,36 +118,33 @@ public:
 
 private:
     /// @brief Pointer to platform-specific Renderer data.
-    ///
-    /// TODO: Normally, this should be an unique_ptr.
-    /// But in my usecase, it's simpler to leave shared_ptr
-    /// because it doesn't allow me to init the object in a "copy" way.
-    /// Is there a better way maybe?
-    std::shared_ptr<RendererSpecific> mp_Specific;
+    std::unique_ptr<RendererSpecific> mp_Specific;
 
     /// @brief Is the renderer inited and ready to use?
-    bool m_IsInited;
+    bool m_IsInited = false;
 
     /// @brief Quantity of frames that were rendered since the renderer init.
-    unsigned long int m_Frames;
+    unsigned long int m_Frames = 0;
 
     /// @brief Current size of the physical renderer window.
     ///
     /// 0 by default when not inited.
     ///
     /// Note `m_Scale`.
-    int m_WindowWidth, m_WindowHeight;
+    int m_WindowWidth = 0, m_WindowHeight = 0;
 
     /// @brief Current size of the game environment.
     ///
     /// 0 by default when not inited.
     ///
     /// Note `m_Scale`.
-    int m_GameWidth, m_GameHeight;
+    int m_GameWidth = 0, m_GameHeight = 0;
 
     /// @brief Value that returns real window size when multiplied with game resolution.
     ///
+    /// Default value is 1.
+    ///
     /// E.g. `GAME_RES * scale = WINDOW_SIZE`
     /// => `{1280:720} * 1.5 = {1920:1080}`
-    float m_Scale;
+    float m_Scale = 1;
 };

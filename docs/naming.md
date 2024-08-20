@@ -23,13 +23,17 @@ Classnames / enum / struct:
 class GameManager {};
 ```
 
-Abstract classnames:
+Abstract classnames / interfaces:
 ```cpp
 class BasePhysian {};
+// Or
+class IPhysian {};
 
 // ...
 
 class PhysianBox : public BasePhysian {};
+// Or
+class PhysianBox : public IPhysian {};
 ```
 
 Structs/enums that take part of a module:

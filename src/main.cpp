@@ -2,6 +2,8 @@
 
 int main()
 {
-    auto game_manager = GameManager();
-    game_manager.cycle();
+    GameManager game_manager;
+
+    while(game_manager.step())
+        game_manager.render();
 }

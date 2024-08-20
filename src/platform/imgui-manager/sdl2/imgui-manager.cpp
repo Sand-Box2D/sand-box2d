@@ -12,7 +12,5 @@
  * create a new implementation named `sdl2-vita`.
  */
 
-ImGuiManager::ImGuiManager() {}
+ImGuiManager::ImGuiManager(Renderer &r_renderer) {}
 ImGuiManager::~ImGuiManager() {}
-
-void ImGuiManager::init(Renderer *r_renderer) {}

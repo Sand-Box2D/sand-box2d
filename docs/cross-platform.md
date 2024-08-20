@@ -67,17 +67,13 @@ is the name of this basic module class (here it's `Renderer`, thus `RendererSpec
 struct RendererSpecific;
 ```
 
-4. Add a private pointer to the declaration of this module class (here's a to-do btw)
+4. Add a private pointer to the declaration of this module class
+(you can choose between smart unique and shared pointers, or bare C ptr if you like)
 (for info, you have to use a pointer since it's a forward-declared struct):
 ```cpp
 private:
     /// @brief Pointer to platform-specific Renderer data.
-    ///
-    /// TODO: Normally, this should be an unique_ptr.
-    /// But in my usecase, it's simpler to leave shared_ptr
-    /// because it doesn't allow me to init the object in a "copy" way.
-    /// Is there a better way maybe?
-    std::shared_ptr<RendererSpecific> mp_Specific;
+    std::unique_ptr<RendererSpecific> mp_Specific;
 ```
 
 5. Now, you have a little private storage that you can use however you want in your
