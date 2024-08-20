@@ -15,14 +15,14 @@ Also note that game is compiled with the GNU Compiler Collection.
 ## Prerequisites
 Let's prepare our dev environment by installing all the tools we need.
 
-1. Install GCC, Make, CMake and dependencies with your package manager
+1. Install Git, GCC, Make, CMake and dependencies with your package manager
 (adapt your command, these are some test commands or their parts that could be useful):
 ```
-sudo apt install gcc make cmake libsdl2-dev
+sudo apt install git gcc make cmake libsdl2-dev
 
 ...
 
-gcc make cmake sdl2
+git gcc make cmake sdl2
 ```
 
 ## Compile
