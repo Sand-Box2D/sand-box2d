@@ -2,8 +2,11 @@
 
 #include <memory>
 
+/// @brief Declaration of platform-specific Controls data.
+struct ControlsSpecific;
+
 /**
- * @brief Controls class provides you the state of the pressed "buttons" in game.
+ * @brief Class allowing you to access currently pressed buttons.
  * 
  * Buttons and their handling is hardly linked. Button remapping is a to-do.
  * 
@@ -15,16 +18,11 @@
  * It is generally suggested to have two "Controls" objects:
  * one showing the state of controls in this frame and another in the previous.
  * Like this, it's very easy to handle keyups/keydowns `(now && !old)`.
+ * 
+ * When created, Controls do nothing.
+ * You have to call `check()` to query pressed buttons.
+ * You can then access their states by calling various methods of this class.
  */
-
-/// @brief Declaration of platform-specific Controls data.
-struct ControlsSpecific;
-
-/// @brief Class allowing you to access currently pressed buttons.
-///
-/// When created, Controls does nothing.
-/// You have to call `check()` to query pressed buttons.
-/// You can then access their states by calling various methods of this class.
 class Controls
 {
 public:

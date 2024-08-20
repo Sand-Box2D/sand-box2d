@@ -1,7 +1,12 @@
 #pragma once
 
+enum Scene
+{
+    SCENE_MAIN = 0
+};
+
 /**
- * @brief Base class for a scene,
+ * @brief Interface for a scene,
  * an object that possesses all the screen area at this moment.
  * 
  * Is managed by SceneManager. When game has to change the scene
@@ -20,17 +25,20 @@
  * We can do a little schema (0Step is one scene, 1Step is another):
  * 
  * 0Step (true) -> 0Render -> 0Step (false) -> 1Init -> 1Step (true) -> 1Render -> 1Step...
+ * 
+ * Generally, the idea is that there is only one single IScene object
+ * which is created and deleted when the scene has to change.
+ * 
+ * But it's also previewed that there should be an "overlay scene", that is
+ * a scene which can render while another scene is still loaded and has all the context
+ * with the ability to quickly "resume" it from that state.
+ * Imagine settings menu called from pause menu while level is loaded
+ * and you can quickly return to it.
  */
-
-enum Scene
-{
-    SCENE_MAIN = 0
-};
-
-class BaseScene
+class IScene
 {
 public:
-    virtual ~BaseScene() {};
+    virtual ~IScene() {};
 protected:
     /* data */
 };

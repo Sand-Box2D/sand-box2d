@@ -9,11 +9,9 @@
  * 
  * As Dear ImGui requires some of its proper config on different platforms,
  * this platform-specific module was introduced.
+ * 
+ * When created, manager inits Dear ImGui and binds it to your renderer.
  */
-
-/// @brief Class managing the Dear ImGui for you.
-///
-/// When created, manager inits Dear ImGui and binds it to your renderer.
 class ImGuiManager
 {
 public:

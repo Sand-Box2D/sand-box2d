@@ -2,17 +2,6 @@
 
 #include <memory>
 
-/**
- * @brief Renderer class implements basic functions of a renderer environment.
- * 
- * It initializes the window and its renderer, lets you get/set resolution and,
- * most importantly, provides you the basic rendering functions
- * such as "render this texture there with this angle".
- * 
- * It could be implemented differently on different platforms.
- * For now, only SDL2 renderer is implemented.
- */
-
 /// @brief Declaration of platform-specific Renderer data.
 struct RendererSpecific;
 
@@ -62,21 +51,33 @@ struct RendererColor
 /**
  * @brief Renderer of the game.
  * 
+ * It initializes the window and its renderer, lets you get/set resolution and,
+ * most importantly, provides you the basic rendering functions
+ * such as "render this texture there with this angle".
+ * 
+ * It could be implemented differently on different platforms.
+ * For now, only SDL2 renderer is implemented.
+ * 
  * Refer to the current platform source .cpp file to know which implementation this is.
  * 
- * When created, Renderer inits the graphics environment and you'll have to
- * pass the `rendererParams` struct if you need to overwrite default params of the window/renderer
+ * When created, Renderer does nothing. To init the graphics environment, call `init()`
+ * passing the `rendererParams` struct if you need to overwrite default params
  * (that is, software fullscreen window. You pass the struct to launch in a window for example).
  */
 class Renderer
 {
 public:
-    /// @brief Init the graphical environment (create a window and its renderer).
-    /// @param rendererParams RendererParams to create a window/renderer with.
-    Renderer(RendererParams rendererParams = RendererParams());
+    Renderer();
     ~Renderer();
 
+    /// @brief Init the graphical environment (create a window and its renderer).
+    /// @param rendererParams RendererParams to create a window/renderer with.
+    /// @return True if could init correctly. False if not.
+    bool init(RendererParams rendererParams = RendererParams());
+
     /// @brief Set the new renderer params when need to update.
+    ///
+    /// It won't init the renderer. Call `init()` instead.
     /// @param rendererParams New RendererParams.
     void setParams(RendererParams rendererParams);
 
@@ -109,6 +110,11 @@ public:
     /// @return 0 if didn't yet init renderer.
     unsigned long int getFrames();
 
+    /// @brief Get platform-specific renderer data.
+    /// @return Pointer to a forward-declared struct which contains data specific
+    /// to the current implementation.
+    std::shared_ptr<RendererSpecific> getSpecific();
+
     /// @brief Fill the whole screen with a single color.
     /// @param color Desired color of the screen (background even).
     void clearScreen(RendererColor color);
@@ -118,7 +124,7 @@ public:
 
 private:
     /// @brief Pointer to platform-specific Renderer data.
-    std::unique_ptr<RendererSpecific> mp_Specific;
+    std::shared_ptr<RendererSpecific> mp_Specific;
 
     /// @brief Is the renderer inited and ready to use?
     bool m_IsInited = false;

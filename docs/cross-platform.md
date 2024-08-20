@@ -39,8 +39,8 @@ where platform describes where this directory should be compiled
 (for example, "std" for modern C++ and "vita" for PS Vita specifically).
 5. Create a **source file** inside that dir which includes the base header file
 named as the module and realizes it (we'll use `module.cpp`).
-6. As of [commenting convention](./commenting.md) p.2,
-please describe **difference** between other implementations.
+6. Please describe **difference** between other implementations
+at the top of the implementation source file.
 7. Add other header/source files inside that dir if needed.
 8. When finished, ensure you have implementations working on **all the platforms**.
 9. Open [`CMakeLists.txt`](/CMakeLists.txt) file
@@ -94,7 +94,7 @@ struct RendererSpecific
 which *might* be the simpler solution with other forward-declared types as for SDL2).
 Load:
 ```cpp
-Renderer::mp_Specific = std::make_shared<RendererSpecific>();
+Renderer::mp_Specific = std::make_unique<RendererSpecific>();
 
 // ...
 
@@ -200,6 +200,6 @@ a `SDL_Renderer*`. That means that current implementation could only work with
 SDL2 Renderer implementation of Renderer. That's the info you have to consider
 putting in the implementation description:
 ```
-NOTE: Please remember that current implementation only works with
-the SDL2 Implementation of Renderer.
+NOTE: Please remember that current implementation only works
+with the SDL2 Implementation of Renderer.
 ```

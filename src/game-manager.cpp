@@ -1,6 +1,11 @@
 #include "game-manager.hpp"
 
-GameManager::GameManager() {}
+GameManager::GameManager()
+{
+    // load settings...
+
+    GameManager::m_Renderer.init({1, RR_MODE_WINDOW, 960, 544});
+}
 GameManager::~GameManager() {}
 
 // FIXME: Delete all this s*** when needed
