@@ -64,6 +64,42 @@ elseif(BUILD_LINUX)
 
     project(${GAME_NAME})
 
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")    # Use C++ version 17
+
+    file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
+
+    file(GLOB SRC_IMGUI "${IMGUI_FOLDER}/im*[.h|.cpp]")
+    file(GLOB SRC_IMGUI_SDL2 "${IMGUI_FOLDER}/backends/imgui_impl_sdl2*[.h|.cpp]")
+    file(GLOB SRC_IMGUI_SDLRENDERER2 "${IMGUI_FOLDER}/backends/imgui_impl_sdlrenderer2*[.h|.cpp]")
+
+    add_executable(${CMAKE_PROJECT_NAME}
+        ${SRC_MAIN}
+        ${SRC_MANAGER}
+
+        ${SRC_SYSTEM}
+        ${SRC_MODELS}
+
+        ${SRC_PLATFORM_RENDERER_SDL2}
+        ${SRC_PLATFORM_CONTROLS_SDL2}
+
+        ${SRC_IMGUI}
+        ${SRC_IMGUI_SDL2}
+        ${SRC_IMGUI_SDLRENDERER2}
+    )
+
+    target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+        "${IMGUI_FOLDER}"
+    )
+
+    find_package(SDL2)
+
+    target_link_libraries(${CMAKE_PROJECT_NAME}
+        SDL2
+    )
+
+    file(COPY assets DESTINATION .)
+
 elseif(BUILD_MACOS)
     message(STATUS "Building for macOS")
     add_definitions(-DBUILD_MACOS)
