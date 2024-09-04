@@ -5,6 +5,8 @@
 #include "platform/renderer/renderer.hpp"
 #include "platform/controls/controls.hpp"
 
+#include "system/scene-manager.hpp"
+
 /**
  * @brief GameManager is the principal class of the game. It manages all.
  * 
@@ -42,4 +44,7 @@ private:
 
     /// @brief Object providing state of the buttons pressed in the previous frame.
     Controls m_OldControls;
+
+    /// @brief Object allowing us to work with all the game scenes.
+    SceneManager m_SceneManager;
 };
