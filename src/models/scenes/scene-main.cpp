@@ -36,6 +36,8 @@ bool SceneMain::step(
         SceneMain::m_Test++;
     else
         SceneMain::m_Test--;
+
+    return true;
 }
 
 void SceneMain::render(Renderer &r_renderer)
