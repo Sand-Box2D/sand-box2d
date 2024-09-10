@@ -5,7 +5,7 @@ option(BUILD_LINUX "Build Linux executable" OFF)
 option(BUILD_MACOS "Build macOS executable" OFF)
 option(BUILD_VITA "Build PS Vita .vpk" OFF)
 
-set(GAME_NAME "Sand-Box2D")
+set(GAME_NAME "sand-box2d")
 
 set(IMGUI_FOLDER "src/lib/imgui")
 
