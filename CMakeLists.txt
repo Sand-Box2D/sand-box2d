@@ -88,11 +88,12 @@ elseif(BUILD_LINUX)
         ${SRC_IMGUI_SDLRENDERER2}
     )
 
+    find_package(SDL2)
+
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         "${IMGUI_FOLDER}"
+        "${SDL2_INCLUDE_DIRS}"
     )
-
-    find_package(SDL2)
 
     target_link_libraries(${CMAKE_PROJECT_NAME}
         SDL2
@@ -130,15 +131,16 @@ elseif(BUILD_MACOS)
         ${SRC_IMGUI_SDLRENDERER2}
     )
 
-    target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-        "${IMGUI_FOLDER}"
-        "/opt/homebrew/include"
-    )
-
-    find_library(SDL2_LIBS sdl2)
+    find_package(SDL2)
 
     target_link_libraries(${CMAKE_PROJECT_NAME}
-        ${SDL2_LIBS}
+        SDL2::SDL2
+    )
+
+    target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+        "${IMGUI_FOLDER}"
+        "${SDL2_INCLUDE_DIRS}"
+        "/opt/homebrew/include"
     )
 
     file(COPY assets DESTINATION .)
