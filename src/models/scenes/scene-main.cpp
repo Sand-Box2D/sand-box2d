@@ -2,6 +2,7 @@
 
 SceneMain::SceneMain()
     : m_TestMin(0x30)       // First time using RAII syntax, yay!@!1!
+    , m_TestSpeed(0x40)
     , m_TestMax(0x50)
 {}
 SceneMain::~SceneMain()
@@ -24,18 +25,17 @@ bool SceneMain::step(
     Controls &r_controls,
     Controls &r_old_controls
 ) {
-    if (
-        (SceneMain::m_Test > SceneMain::m_TestMax)
-        ||
-        (SceneMain::m_Test < SceneMain::m_TestMin)
-    ) {
-        SceneMain::m_TestDirection = !SceneMain::m_TestDirection;
-    }
+    float testStep = SceneMain::m_TestSpeed * r_renderer.getDelta() / 1000.f;
+
+    if (SceneMain::m_Test > SceneMain::m_TestMax)
+        SceneMain::m_TestDirection = false;
+    if (SceneMain::m_Test < SceneMain::m_TestMin)
+        SceneMain::m_TestDirection = true;
 
     if (SceneMain::m_TestDirection)
-        SceneMain::m_Test++;
+        SceneMain::m_Test += testStep;
     else
-        SceneMain::m_Test--;
+        SceneMain::m_Test -= testStep;
 
     return true;
 }

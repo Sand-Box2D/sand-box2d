@@ -221,10 +221,9 @@ float Renderer::getScale()
     return m_Scale;
 }
 
-float Renderer::getDelta()
+double Renderer::getDelta()
 {
-    const float PLACEHOLDER_DELTA = 16.6; // TODO
-    return PLACEHOLDER_DELTA;
+    return m_Delta;
 }
 
 unsigned long int Renderer::getFrames()
@@ -251,5 +250,14 @@ void Renderer::clearScreen(RendererColor color)
 
 void Renderer::render()
 {
+    Renderer::m_PerfLast = Renderer::m_PerfNow;
+    Renderer::m_PerfNow = SDL_GetPerformanceCounter();
+
+    Renderer::m_Delta = (double)(
+        (Renderer::m_PerfNow - Renderer::m_PerfLast) * 1000
+        /
+        (double)SDL_GetPerformanceFrequency()
+    );
+
     SDL_RenderPresent(Renderer::mp_Specific->p_renderer);
 }

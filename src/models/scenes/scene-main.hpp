@@ -34,5 +34,7 @@ private:
     /// @brief TODO: DELETE ME.
     const unsigned char m_TestMax;
     /// @brief TODO: DELETE ME.
+    const unsigned char m_TestSpeed;
+    /// @brief TODO: DELETE ME.
     unsigned char m_Test;
 };

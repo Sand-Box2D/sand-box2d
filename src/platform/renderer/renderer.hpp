@@ -105,8 +105,12 @@ public:
     float getScale();
 
     /// @brief Get time between two renders in milliseconds.
+    ///
+    /// ATTENTION: First few calls, function will return a wrong value.
+    ///
+    /// Its return value will update at every `render()` call.
     /// @return 0 if didn't yet init renderer.
-    float getDelta();
+    double getDelta();
 
     /// @brief Get rendered frames count since the renderer init.
     /// @return 0 if didn't yet init renderer.
@@ -122,6 +126,8 @@ public:
     void clearScreen(RendererColor color);
 
     /// @brief Swap the renderer buffer and show everything that was rendered.
+    ///
+    /// Also it refreshes the delta time value you can access via `getDelta()`.
     void render();
 
 private:
@@ -155,4 +161,10 @@ private:
     /// E.g. `GAME_RES * scale = WINDOW_SIZE`
     /// => `{1280:720} * 1.5 = {1920:1080}`
     float m_Scale = 1;
+
+    /// @brief Value used to calculate the delta time.
+    uint64_t m_PerfNow = 0, m_PerfLast = 0;
+
+    /// @brief Current value of the time between two renders in milliseconds.
+    double m_Delta = 0;
 };

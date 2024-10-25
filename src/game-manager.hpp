@@ -24,8 +24,9 @@ public:
 
     /// @brief Make a logical step of the game.
     ///
-    /// It will decide which scene should be executed.
-    /// For more info refer to `models/scenes/scene.hpp`.
+    /// It will update all the game global parameters
+    /// and tell SceneManager to update the scene.
+    /// For more info refer to `system/scene-manager.hpp`.
     /// @return False when game has to be closed now.
     bool step();
 
