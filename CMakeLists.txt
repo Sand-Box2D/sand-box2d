@@ -54,7 +54,7 @@ if(BUILD_WINDOWS)
     )
 
     target_link_libraries(${CMAKE_PROJECT_NAME}
-        SDL2::SDL2 # TODO: Test if it works. If not, change "SDL2::SDL2" to "SDL2".
+        SDL2::SDL2
     )
 
     file(COPY assets DESTINATION .)
