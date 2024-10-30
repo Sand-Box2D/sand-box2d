@@ -37,6 +37,8 @@ bool SceneMain::step(
     else
         SceneMain::m_Test -= testStep;
 
+    ImGui::ShowDemoWindow();
+
     return true;
 }
 

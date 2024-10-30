@@ -15,6 +15,8 @@ bool GameManager::step()
     GameManager::m_Controls.check();
 
     // step...
+    GameManager::m_ImGuiManager.step();
+
     GameManager::m_SceneManager.step(
         GameManager::m_Renderer,
         GameManager::m_Controls,
@@ -30,6 +32,7 @@ void GameManager::render()
 {
     // render...
     GameManager::m_SceneManager.render(GameManager::m_Renderer);
+    GameManager::m_ImGuiManager.render(GameManager::m_Renderer);
 
     GameManager::m_Renderer.render();
 }

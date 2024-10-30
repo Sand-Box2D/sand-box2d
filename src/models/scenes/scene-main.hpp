@@ -4,6 +4,8 @@
 
 #include "scene.hpp"
 
+#include "platform/imgui-manager/imgui-manager.hpp"
+
 /**
  * @brief Main Menu Scene.
  * 
