@@ -7,3 +7,19 @@
  */
 
 #include "../controls.hpp"
+
+/// @brief PS Vita Controls specific data.
+struct ControlsSpecific {};
+
+Controls::Controls() {}
+Controls::~Controls() {}
+
+void Controls::check()
+{
+
+}
+
+bool Controls::getQuit()
+{
+    return Controls::isQuit;
+}
