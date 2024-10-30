@@ -27,6 +27,7 @@ if(BUILD_WINDOWS)
 
     file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
     file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_IMGUI_MANAGER_SDL2 "src/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
 
     file(GLOB SRC_IMGUI "${IMGUI_FOLDER}/im*[.h|.cpp]")
     file(GLOB SRC_IMGUI_SDL2 "${IMGUI_FOLDER}/backends/imgui_impl_sdl2*[.h|.cpp]")
@@ -41,6 +42,7 @@ if(BUILD_WINDOWS)
 
         ${SRC_PLATFORM_RENDERER_SDL2}
         ${SRC_PLATFORM_CONTROLS_SDL2}
+        ${SRC_PLATFORM_IMGUI_MANAGER_SDL2}
 
         ${SRC_IMGUI}
         ${SRC_IMGUI_SDL2}
@@ -71,6 +73,7 @@ elseif(BUILD_LINUX)
 
     file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
     file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_IMGUI_MANAGER_SDL2 "src/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
 
     file(GLOB SRC_IMGUI "${IMGUI_FOLDER}/im*[.h|.cpp]")
     file(GLOB SRC_IMGUI_SDL2 "${IMGUI_FOLDER}/backends/imgui_impl_sdl2*[.h|.cpp]")
@@ -85,6 +88,7 @@ elseif(BUILD_LINUX)
 
         ${SRC_PLATFORM_RENDERER_SDL2}
         ${SRC_PLATFORM_CONTROLS_SDL2}
+        ${SRC_PLATFORM_IMGUI_MANAGER_SDL2}
 
         ${SRC_IMGUI}
         ${SRC_IMGUI_SDL2}
@@ -115,6 +119,7 @@ elseif(BUILD_MACOS)
 
     file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
     file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_IMGUI_MANAGER_SDL2 "src/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
 
     file(GLOB SRC_IMGUI "${IMGUI_FOLDER}/im*[.h|.cpp]")
     file(GLOB SRC_IMGUI_SDL2 "${IMGUI_FOLDER}/backends/imgui_impl_sdl2*[.h|.cpp]")
@@ -129,6 +134,7 @@ elseif(BUILD_MACOS)
 
         ${SRC_PLATFORM_RENDERER_SDL2}
         ${SRC_PLATFORM_CONTROLS_SDL2}
+        ${SRC_PLATFORM_IMGUI_MANAGER_SDL2}
 
         ${SRC_IMGUI}
         ${SRC_IMGUI_SDL2}
@@ -174,6 +180,7 @@ elseif(BUILD_VITA)
 
     file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
     file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_IMGUI_MANAGER_SDL2 "src/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
 
     add_executable(${CMAKE_PROJECT_NAME}
         ${SRC_MAIN}
@@ -184,6 +191,7 @@ elseif(BUILD_VITA)
 
         ${SRC_PLATFORM_RENDERER_SDL2}
         ${SRC_PLATFORM_CONTROLS_SDL2}
+        ${SRC_PLATFORM_IMGUI_MANAGER_SDL2}
     )
 
     find_package(SDL2)
