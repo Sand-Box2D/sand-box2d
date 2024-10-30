@@ -80,7 +80,6 @@ elseif(BUILD_LINUX)
     file(GLOB SRC_PLATFORM_IMGUI_MANAGER "${SRC_DIR}/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
 
     # SDL2 Implementations
-    file(GLOB SRC_IMGUI "${IMGUI_DIR}/im*[.h|.cpp]")
     file(GLOB SRC_IMGUI_WINDOW "${IMGUI_DIR}/backends/imgui_impl_sdl2*[.h|.cpp]")
     file(GLOB SRC_IMGUI_RENDERER "${IMGUI_DIR}/backends/imgui_impl_sdlrenderer2*[.h|.cpp]")
 
@@ -128,7 +127,6 @@ elseif(BUILD_MACOS)
     file(GLOB SRC_PLATFORM_IMGUI_MANAGER "${SRC_DIR}/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
 
     # SDL2 Implementations
-    file(GLOB SRC_IMGUI "${IMGUI_DIR}/im*[.h|.cpp]")
     file(GLOB SRC_IMGUI_WINDOW "${IMGUI_DIR}/backends/imgui_impl_sdl2*[.h|.cpp]")
     file(GLOB SRC_IMGUI_RENDERER "${IMGUI_DIR}/backends/imgui_impl_sdlrenderer2*[.h|.cpp]")
 
@@ -187,7 +185,9 @@ elseif(BUILD_VITA)
 
     # SDL2 Implementations
     file(GLOB SRC_PLATFORM_RENDERER "${SRC_DIR}/platform/renderer/sdl2/*[.hpp|.cpp]")
-    file(GLOB SRC_PLATFORM_CONTROLS "${SRC_DIR}/platform/controls/sdl2/*[.hpp|.cpp]")
+
+    # PS Vita Implementations
+    file(GLOB SRC_PLATFORM_CONTROLS "${SRC_DIR}/platform/controls/vita/*[.hpp|.cpp]")
 
     # SDL2 Implementations Adapted for PS Vita
     file(GLOB SRC_PLATFORM_IMGUI_MANAGER "${SRC_DIR}/platform/imgui-manager/sdl2-vita/*[.hpp|.cpp]")
@@ -202,11 +202,16 @@ elseif(BUILD_VITA)
         ${SRC_PLATFORM_RENDERER}
         ${SRC_PLATFORM_CONTROLS}
         ${SRC_PLATFORM_IMGUI_MANAGER}
+
+        ${SRC_IMGUI}
+        # ${SRC_IMGUI_WINDOW}
+        # ${SRC_IMGUI_RENDERER}
     )
 
     find_package(SDL2)
 
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+        "${SRC_DIR}"
         "${SDL2_INCLUDE_DIRS}"
     )
 
