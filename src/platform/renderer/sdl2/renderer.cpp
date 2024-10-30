@@ -12,9 +12,6 @@
 
 #include "../renderer.hpp"
 
-#include <iostream>
-#include <stdexcept>
-
 #include <SDL2/SDL.h>
 
 /// @brief SDL2 Renderer impl. specific data.
@@ -104,7 +101,7 @@ bool Renderer::init(RendererParams rendererParams)
             break;
 
         default:
-            throw std::invalid_argument("Please select the renderer mode!");
+            throw std::exception();
         }
 
         Renderer::m_Scale = rendererParams.scale;
@@ -129,7 +126,6 @@ bool Renderer::init(RendererParams rendererParams)
     }
     catch (const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
         return false;
     }
 }
