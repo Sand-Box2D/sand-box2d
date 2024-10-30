@@ -116,10 +116,19 @@ public:
     /// @return 0 if didn't yet init renderer.
     unsigned long int getFrames();
 
-    /// @brief Get platform-specific renderer data.
-    /// @return Pointer to a forward-declared struct which contains data specific
-    /// to the current implementation.
-    std::shared_ptr<RendererSpecific> getSpecific();
+    /// @brief Get link to the window object specific to an implementation.
+    /// @tparam TWindow Type of the pointer to the window object that could be different
+    /// on different Window platforms such as SDL2 or OpenGL.
+    /// @return Pointer to the specific window object.
+    template<typename TWindow>
+    TWindow getWindow();
+
+    /// @brief Get link to the renderer object specific to an implementation.
+    /// @tparam TRenderer Type of the pointer to the renderer object that could be different
+    /// on different Renderer platforms such as SDL2 or OpenGL.
+    /// @return Pointer to the specific renderer object.
+    template<typename TRenderer>
+    TRenderer getRenderer();
 
     /// @brief Fill the whole screen with a single color.
     /// @param color Desired color of the screen (background even).

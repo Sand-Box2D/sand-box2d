@@ -4,6 +4,7 @@
 
 #include "platform/renderer/renderer.hpp"
 #include "platform/controls/controls.hpp"
+#include "platform/imgui-manager/imgui-manager.hpp"
 
 #include "system/scene-manager.hpp"
 
@@ -45,6 +46,9 @@ private:
 
     /// @brief Object providing state of the buttons pressed in the previous frame.
     Controls m_OldControls;
+
+    /// @brief Object allowing us to work with the Dear ImGui.
+    ImGuiManager m_ImGuiManager;
 
     /// @brief Object allowing us to work with all the game scenes.
     SceneManager m_SceneManager;

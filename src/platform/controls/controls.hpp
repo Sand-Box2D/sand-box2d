@@ -17,6 +17,9 @@ struct ControlsSpecific;
  * 0 and 1. This is due to the fact that these buttons could be clicked with a 
  * different force on certain platforms.
  * 
+ * As ImGui is used in the game, Controls implementation should take care of it
+ * by passing all its input data to it (so ImGui will navigate).
+ * 
  * It is generally suggested to have two "Controls" objects:
  * one showing the state of controls in this frame and another in the previous.
  * Like this, it's very easy to handle keyups/keydowns `(now && !old)`.
@@ -35,6 +38,8 @@ public:
     ///
     /// This puts their states to private variables of this object
     /// you can access with public methods.
+    ///
+    /// It could also pass input data to ImGui directly.
     void check();
 
     /// @brief Get state of the action telling game to close.

@@ -6,6 +6,7 @@ GameManager::GameManager()
     GameManager::m_SceneManager.init(SCENE_MAIN);
 
     GameManager::m_Renderer.init({1, RR_MODE_WINDOW, 960, 544});
+    GameManager::m_ImGuiManager.init(GameManager::m_Renderer);
 }
 GameManager::~GameManager() {}
 

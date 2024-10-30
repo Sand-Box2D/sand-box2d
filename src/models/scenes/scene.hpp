@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "../../platform/renderer/renderer.hpp"
-#include "../../platform/controls/controls.hpp"
+#include "platform/renderer/renderer.hpp"
+#include "platform/controls/controls.hpp"
 
 /// @brief Enum describing which scene should be shown now.
 enum CurrentScene

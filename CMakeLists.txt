@@ -7,6 +7,7 @@ option(BUILD_VITA "Build PS Vita .vpk" OFF)
 
 set(GAME_NAME "sand-box2d")
 
+set(SRC_FOLDER "src")
 set(IMGUI_FOLDER "src/lib/imgui")
 
 file(GLOB SRC_MAIN "src/main*[.hpp|.cpp]")
@@ -49,6 +50,7 @@ if(BUILD_WINDOWS)
     find_package(SDL2)
 
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+        "${SRC_FOLDER}"
         "${IMGUI_FOLDER}"
         "${SDL2_INCLUDE_DIRS}"
     )
@@ -92,6 +94,7 @@ elseif(BUILD_LINUX)
     find_package(SDL2)
 
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+        "${SRC_FOLDER}"
         "${IMGUI_FOLDER}"
         "${SDL2_INCLUDE_DIRS}"
     )
@@ -135,6 +138,7 @@ elseif(BUILD_MACOS)
     find_package(SDL2)
 
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+        "${SRC_FOLDER}"
         "${IMGUI_FOLDER}"
         "${SDL2_INCLUDE_DIRS}"
     )

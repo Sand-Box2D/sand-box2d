@@ -231,10 +231,19 @@ unsigned long int Renderer::getFrames()
     return m_Frames;
 }
 
-std::shared_ptr<RendererSpecific> Renderer::getSpecific()
+template<typename TWindow>
+TWindow Renderer::getWindow()
 {
-    return mp_Specific;
+    return Renderer::mp_Specific->p_window;
 }
+template SDL_Window* Renderer::getWindow();
+
+template<typename TRenderer>
+TRenderer Renderer::getRenderer()
+{
+    return Renderer::mp_Specific->p_renderer;
+}
+template SDL_Renderer* Renderer::getRenderer();
 
 void Renderer::clearScreen(RendererColor color)
 {

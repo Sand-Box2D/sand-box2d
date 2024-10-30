@@ -11,6 +11,8 @@
 
 #include <SDL2/SDL.h>
 
+#include "lib/imgui/backends/imgui_impl_sdl2.h"
+
 /// @brief SDL2 Controls specific data.
 struct ControlsSpecific {};
 
@@ -23,6 +25,8 @@ void Controls::check()
 
     while (SDL_PollEvent(&event))
     {
+        ImGui_ImplSDL2_ProcessEvent(&event);
+
         switch (event.type)
         {
         case SDL_QUIT:
