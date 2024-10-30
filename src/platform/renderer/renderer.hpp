@@ -118,14 +118,14 @@ public:
 
     /// @brief Get link to the window object specific to an implementation.
     /// @tparam TWindow Type of the pointer to the window object that could be different
-    /// on different Window platforms such as SDL2 or OpenGL.
+    /// on different Window platforms such as SDL2 or GLFW.
     /// @return Pointer to the specific window object.
     template<typename TWindow>
     TWindow getWindow();
 
     /// @brief Get link to the renderer object specific to an implementation.
     /// @tparam TRenderer Type of the pointer to the renderer object that could be different
-    /// on different Renderer platforms such as SDL2 or OpenGL.
+    /// on different Renderer platforms such as SDL2 Renderer or OpenGL.
     /// @return Pointer to the specific renderer object.
     template<typename TRenderer>
     TRenderer getRenderer();

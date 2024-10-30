@@ -5,16 +5,18 @@ option(BUILD_LINUX "Build Linux executable" OFF)
 option(BUILD_MACOS "Build macOS executable" OFF)
 option(BUILD_VITA "Build PS Vita .vpk" OFF)
 
-set(GAME_NAME "sand-box2d")
+set(GAME_NAME "Sand-Box2D")
 
-set(SRC_FOLDER "src")
-set(IMGUI_FOLDER "src/lib/imgui")
+set(SRC_DIR "src")
+set(IMGUI_DIR "${SRC_DIR}/lib/imgui")
 
-file(GLOB SRC_MAIN "src/main*[.hpp|.cpp]")
-file(GLOB SRC_MANAGER "src/game-manager*[.hpp|.cpp]")
+file(GLOB SRC_MAIN "${SRC_DIR}/main*[.hpp|.cpp]")
+file(GLOB SRC_MANAGER "${SRC_DIR}/game-manager*[.hpp|.cpp]")
 
-file(GLOB_RECURSE SRC_SYSTEM "src/system/*[.hpp|.cpp]")
-file(GLOB_RECURSE SRC_MODELS "src/models/*[.hpp|.cpp]")
+file(GLOB_RECURSE SRC_SYSTEM "${SRC_DIR}/system/*[.hpp|.cpp]")
+file(GLOB_RECURSE SRC_MODELS "${SRC_DIR}/models/*[.hpp|.cpp]")
+
+file(GLOB SRC_IMGUI "${IMGUI_DIR}/im*[.h|.cpp]")
 
 if(BUILD_WINDOWS)
     message(STATUS "Building for Windows")
@@ -25,13 +27,14 @@ if(BUILD_WINDOWS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")    # Use C++ version 17
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows")     # Hide terminal window
 
-    file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
-    file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
-    file(GLOB SRC_PLATFORM_IMGUI_MANAGER_SDL2 "src/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
+    # SDL2 Implementations
+    file(GLOB SRC_PLATFORM_RENDERER "${SRC_DIR}/platform/renderer/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_CONTROLS "${SRC_DIR}/platform/controls/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_IMGUI_MANAGER "${SRC_DIR}/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
 
-    file(GLOB SRC_IMGUI "${IMGUI_FOLDER}/im*[.h|.cpp]")
-    file(GLOB SRC_IMGUI_SDL2 "${IMGUI_FOLDER}/backends/imgui_impl_sdl2*[.h|.cpp]")
-    file(GLOB SRC_IMGUI_SDLRENDERER2 "${IMGUI_FOLDER}/backends/imgui_impl_sdlrenderer2*[.h|.cpp]")
+    # SDL2 Implementations
+    file(GLOB SRC_IMGUI_WINDOW "${IMGUI_DIR}/backends/imgui_impl_sdl2*[.h|.cpp]")
+    file(GLOB SRC_IMGUI_RENDERER "${IMGUI_DIR}/backends/imgui_impl_sdlrenderer2*[.h|.cpp]")
 
     add_executable(${CMAKE_PROJECT_NAME}
         ${SRC_MAIN}
@@ -40,20 +43,20 @@ if(BUILD_WINDOWS)
         ${SRC_SYSTEM}
         ${SRC_MODELS}
 
-        ${SRC_PLATFORM_RENDERER_SDL2}
-        ${SRC_PLATFORM_CONTROLS_SDL2}
-        ${SRC_PLATFORM_IMGUI_MANAGER_SDL2}
+        ${SRC_PLATFORM_RENDERER}
+        ${SRC_PLATFORM_CONTROLS}
+        ${SRC_PLATFORM_IMGUI_MANAGER}
 
         ${SRC_IMGUI}
-        ${SRC_IMGUI_SDL2}
-        ${SRC_IMGUI_SDLRENDERER2}
+        ${SRC_IMGUI_WINDOW}
+        ${SRC_IMGUI_RENDERER}
     )
 
     find_package(SDL2)
 
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-        "${SRC_FOLDER}"
-        "${IMGUI_FOLDER}"
+        "${SRC_DIR}"
+        "${IMGUI_DIR}"
         "${SDL2_INCLUDE_DIRS}"
     )
 
@@ -71,13 +74,15 @@ elseif(BUILD_LINUX)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")    # Use C++ version 17
 
-    file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
-    file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
-    file(GLOB SRC_PLATFORM_IMGUI_MANAGER_SDL2 "src/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
+    # SDL2 Implementations
+    file(GLOB SRC_PLATFORM_RENDERER "${SRC_DIR}/platform/renderer/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_CONTROLS "${SRC_DIR}/platform/controls/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_IMGUI_MANAGER "${SRC_DIR}/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
 
-    file(GLOB SRC_IMGUI "${IMGUI_FOLDER}/im*[.h|.cpp]")
-    file(GLOB SRC_IMGUI_SDL2 "${IMGUI_FOLDER}/backends/imgui_impl_sdl2*[.h|.cpp]")
-    file(GLOB SRC_IMGUI_SDLRENDERER2 "${IMGUI_FOLDER}/backends/imgui_impl_sdlrenderer2*[.h|.cpp]")
+    # SDL2 Implementations
+    file(GLOB SRC_IMGUI "${IMGUI_DIR}/im*[.h|.cpp]")
+    file(GLOB SRC_IMGUI_WINDOW "${IMGUI_DIR}/backends/imgui_impl_sdl2*[.h|.cpp]")
+    file(GLOB SRC_IMGUI_RENDERER "${IMGUI_DIR}/backends/imgui_impl_sdlrenderer2*[.h|.cpp]")
 
     add_executable(${CMAKE_PROJECT_NAME}
         ${SRC_MAIN}
@@ -86,20 +91,20 @@ elseif(BUILD_LINUX)
         ${SRC_SYSTEM}
         ${SRC_MODELS}
 
-        ${SRC_PLATFORM_RENDERER_SDL2}
-        ${SRC_PLATFORM_CONTROLS_SDL2}
-        ${SRC_PLATFORM_IMGUI_MANAGER_SDL2}
+        ${SRC_PLATFORM_RENDERER}
+        ${SRC_PLATFORM_CONTROLS}
+        ${SRC_PLATFORM_IMGUI_MANAGER}
 
         ${SRC_IMGUI}
-        ${SRC_IMGUI_SDL2}
-        ${SRC_IMGUI_SDLRENDERER2}
+        ${SRC_IMGUI_WINDOW}
+        ${SRC_IMGUI_RENDERER}
     )
 
     find_package(SDL2)
 
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-        "${SRC_FOLDER}"
-        "${IMGUI_FOLDER}"
+        "${SRC_DIR}"
+        "${IMGUI_DIR}"
         "${SDL2_INCLUDE_DIRS}"
     )
 
@@ -117,13 +122,15 @@ elseif(BUILD_MACOS)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")    # Use C++ version 17
 
-    file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
-    file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
-    file(GLOB SRC_PLATFORM_IMGUI_MANAGER_SDL2 "src/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
+    # SDL2 Implementations
+    file(GLOB SRC_PLATFORM_RENDERER "${SRC_DIR}/platform/renderer/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_CONTROLS "${SRC_DIR}/platform/controls/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_IMGUI_MANAGER "${SRC_DIR}/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
 
-    file(GLOB SRC_IMGUI "${IMGUI_FOLDER}/im*[.h|.cpp]")
-    file(GLOB SRC_IMGUI_SDL2 "${IMGUI_FOLDER}/backends/imgui_impl_sdl2*[.h|.cpp]")
-    file(GLOB SRC_IMGUI_SDLRENDERER2 "${IMGUI_FOLDER}/backends/imgui_impl_sdlrenderer2*[.h|.cpp]")
+    # SDL2 Implementations
+    file(GLOB SRC_IMGUI "${IMGUI_DIR}/im*[.h|.cpp]")
+    file(GLOB SRC_IMGUI_WINDOW "${IMGUI_DIR}/backends/imgui_impl_sdl2*[.h|.cpp]")
+    file(GLOB SRC_IMGUI_RENDERER "${IMGUI_DIR}/backends/imgui_impl_sdlrenderer2*[.h|.cpp]")
 
     add_executable(${CMAKE_PROJECT_NAME}
         ${SRC_MAIN}
@@ -132,20 +139,20 @@ elseif(BUILD_MACOS)
         ${SRC_SYSTEM}
         ${SRC_MODELS}
 
-        ${SRC_PLATFORM_RENDERER_SDL2}
-        ${SRC_PLATFORM_CONTROLS_SDL2}
-        ${SRC_PLATFORM_IMGUI_MANAGER_SDL2}
+        ${SRC_PLATFORM_RENDERER}
+        ${SRC_PLATFORM_CONTROLS}
+        ${SRC_PLATFORM_IMGUI_MANAGER}
 
         ${SRC_IMGUI}
-        ${SRC_IMGUI_SDL2}
-        ${SRC_IMGUI_SDLRENDERER2}
+        ${SRC_IMGUI_WINDOW}
+        ${SRC_IMGUI_RENDERER}
     )
 
     find_package(SDL2)
 
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-        "${SRC_FOLDER}"
-        "${IMGUI_FOLDER}"
+        "${SRC_DIR}"
+        "${IMGUI_DIR}"
         "${SDL2_INCLUDE_DIRS}"
     )
 
@@ -178,9 +185,12 @@ elseif(BUILD_VITA)
 
     set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
 
-    file(GLOB SRC_PLATFORM_RENDERER_SDL2 "src/platform/renderer/sdl2/*[.hpp|.cpp]")
-    file(GLOB SRC_PLATFORM_CONTROLS_SDL2 "src/platform/controls/sdl2/*[.hpp|.cpp]")
-    file(GLOB SRC_PLATFORM_IMGUI_MANAGER_SDL2 "src/platform/imgui-manager/sdl2/*[.hpp|.cpp]")
+    # SDL2 Implementations
+    file(GLOB SRC_PLATFORM_RENDERER "${SRC_DIR}/platform/renderer/sdl2/*[.hpp|.cpp]")
+    file(GLOB SRC_PLATFORM_CONTROLS "${SRC_DIR}/platform/controls/sdl2/*[.hpp|.cpp]")
+
+    # SDL2 Implementations Adapted for PS Vita
+    file(GLOB SRC_PLATFORM_IMGUI_MANAGER "${SRC_DIR}/platform/imgui-manager/sdl2-vita/*[.hpp|.cpp]")
 
     add_executable(${CMAKE_PROJECT_NAME}
         ${SRC_MAIN}
@@ -189,9 +199,9 @@ elseif(BUILD_VITA)
         ${SRC_SYSTEM}
         ${SRC_MODELS}
 
-        ${SRC_PLATFORM_RENDERER_SDL2}
-        ${SRC_PLATFORM_CONTROLS_SDL2}
-        ${SRC_PLATFORM_IMGUI_MANAGER_SDL2}
+        ${SRC_PLATFORM_RENDERER}
+        ${SRC_PLATFORM_CONTROLS}
+        ${SRC_PLATFORM_IMGUI_MANAGER}
     )
 
     find_package(SDL2)
