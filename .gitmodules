@@ -6,5 +6,5 @@
 [submodule "imgui-vita"]
 	branch = master
 	path = src/lib/imgui-vita
-	url = https://github.com/Rinnegatamante/imgui-vita
+	url = https://github.com/sand-box2d/imgui-vita
 	shallow = true
