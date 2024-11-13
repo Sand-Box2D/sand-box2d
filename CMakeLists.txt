@@ -192,10 +192,6 @@ elseif(BUILD_VITA)
     # SDL2 Implementations Adapted for PS Vita
     file(GLOB SRC_PLATFORM_IMGUI_MANAGER "${SRC_DIR}/platform/imgui-manager/sdl2-vita/*[.hpp|.cpp]")
 
-    # Dear ImGui for PS Vita
-    set(IMGUI_VITA_DIR "${SRC_DIR}/lib/imgui-vita")
-    file(GLOB SRC_IMGUI_VITA "${IMGUI_VITA_DIR}/im*[.h|.cpp]")
-
     add_executable(${CMAKE_PROJECT_NAME}
         ${SRC_MAIN}
         ${SRC_MANAGER}
@@ -207,7 +203,7 @@ elseif(BUILD_VITA)
         ${SRC_PLATFORM_CONTROLS}
         ${SRC_PLATFORM_IMGUI_MANAGER}
 
-        ${SRC_IMGUI_VITA}
+        ${SRC_IMGUI}
         # ${SRC_IMGUI_WINDOW}
         # ${SRC_IMGUI_RENDERER}
     )
