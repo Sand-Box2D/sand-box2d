@@ -22,7 +22,6 @@ ImGuiManager::~ImGuiManager()
 
 void ImGuiManager::init(Renderer &r_renderer)
 {
-    IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
@@ -46,4 +45,9 @@ void ImGuiManager::render(Renderer &r_renderer)
 {
     ImGui::Render();
     // ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), r_renderer.getRenderer<SDL_Renderer*>());
+}
+
+void ImGuiManager::showDemoWindow(bool *p_open)
+{
+    // nothing...
 }

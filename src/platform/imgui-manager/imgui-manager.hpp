@@ -2,7 +2,8 @@
 
 #pragma once
 
-#include "lib/imgui/imgui.h"
+// ... while expecting "lib/imgui/imgui.h" to be added directly to headers.
+#include "imgui.h"
 
 #include "platform/renderer/renderer.hpp"
 
@@ -33,6 +34,14 @@ public:
     /// @brief Render everything that ImGui was asked to render.
     /// @param r_renderer Renderer is required to render stuff.
     void render(Renderer &r_renderer);
+
+    /// @brief Show ImGui demo window. It's been moved to platform-agnostic module
+    /// since it could behave differently on various platforms (PS Vita doesn't have one.
+    /// Thus, nothing happens).
+    ///
+    /// A static method, btw.
+    /// @param p_open Pointer to the variable showing whether demo window is open.
+    static void showDemoWindow(bool *p_open = nullptr);
 
 private:
 };

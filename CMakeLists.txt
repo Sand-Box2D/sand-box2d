@@ -9,6 +9,7 @@ set(GAME_NAME "Sand-Box2D")
 
 set(SRC_DIR "src")
 set(IMGUI_DIR "${SRC_DIR}/lib/imgui")
+set(IMGUI_VITA_DIR "${SRC_DIR}/lib/imgui-vita")
 
 file(GLOB SRC_MAIN "${SRC_DIR}/main*[.hpp|.cpp]")
 file(GLOB SRC_MANAGER "${SRC_DIR}/game-manager*[.hpp|.cpp]")
@@ -17,6 +18,7 @@ file(GLOB_RECURSE SRC_SYSTEM "${SRC_DIR}/system/*[.hpp|.cpp]")
 file(GLOB_RECURSE SRC_MODELS "${SRC_DIR}/models/*[.hpp|.cpp]")
 
 file(GLOB SRC_IMGUI "${IMGUI_DIR}/im*[.h|.cpp]")
+file(GLOB SRC_IMGUI_VITA "${IMGUI_VITA_DIR}/im*[.h|.cpp]")
 
 if(BUILD_WINDOWS)
     message(STATUS "Building for Windows")
@@ -203,7 +205,7 @@ elseif(BUILD_VITA)
         ${SRC_PLATFORM_CONTROLS}
         ${SRC_PLATFORM_IMGUI_MANAGER}
 
-        ${SRC_IMGUI}
+        ${SRC_IMGUI_VITA}
         # ${SRC_IMGUI_WINDOW}
         # ${SRC_IMGUI_RENDERER}
     )

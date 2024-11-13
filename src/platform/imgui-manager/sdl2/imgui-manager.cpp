@@ -9,8 +9,9 @@
 
 #include "../imgui-manager.hpp"
 
-#include "lib/imgui/backends/imgui_impl_sdl2.h"
-#include "lib/imgui/backends/imgui_impl_sdlrenderer2.h"
+// TODO: TEST ME
+#include "backends/imgui_impl_sdl2.h"
+#include "backends/imgui_impl_sdlrenderer2.h"
 
 ImGuiManager::ImGuiManager() {}
 ImGuiManager::~ImGuiManager()
@@ -46,4 +47,9 @@ void ImGuiManager::render(Renderer &r_renderer)
 {
     ImGui::Render();
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), r_renderer.getRenderer<SDL_Renderer*>());
+}
+
+void ImGuiManager::showDemoWindow(bool *p_open)
+{
+    ImGui::ShowDemoWindow(p_open); // Cool! ImGui does same naming conventions as me!
 }
