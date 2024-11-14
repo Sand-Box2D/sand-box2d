@@ -3,14 +3,16 @@
  * 
  * This implementation works with SDL2 window and its renderer.
  * 
+ * Currently, it compiles ImGui but lets you do nothing with it.
+ * 
  * This is SDL2 implementation adapted for PS Vita.
  * Do not use it in another platforms.
  */
 
 #include "../imgui-manager.hpp"
 
-// #include "lib/imgui/backends/imgui_impl_sdl2.h"
-// #include "lib/imgui/backends/imgui_impl_sdlrenderer2.h"
+// #include "backends/imgui_impl_sdl2.h"
+// #include "backends/imgui_impl_sdlrenderer2.h"
 
 ImGuiManager::ImGuiManager() {}
 ImGuiManager::~ImGuiManager()

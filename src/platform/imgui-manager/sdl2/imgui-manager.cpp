@@ -9,7 +9,6 @@
 
 #include "../imgui-manager.hpp"
 
-// TODO: TEST ME
 #include "backends/imgui_impl_sdl2.h"
 #include "backends/imgui_impl_sdlrenderer2.h"
 
@@ -51,5 +50,5 @@ void ImGuiManager::render(Renderer &r_renderer)
 
 void ImGuiManager::showDemoWindow(bool *p_open)
 {
-    ImGui::ShowDemoWindow(p_open); // Cool! ImGui does same naming conventions as me!
+    ImGui::ShowDemoWindow(p_open); // Cool! ImGui does same naming conventions as me! (almost)
 }

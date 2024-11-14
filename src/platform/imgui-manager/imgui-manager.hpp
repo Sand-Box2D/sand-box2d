@@ -2,7 +2,6 @@
 
 #pragma once
 
-// ... while expecting "lib/imgui/imgui.h" to be added directly to headers.
 #include "imgui.h"
 
 #include "platform/renderer/renderer.hpp"
