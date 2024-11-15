@@ -1,11 +1,6 @@
 #include "scene-main.hpp"
 
-SceneMain::SceneMain()
-    : m_TestMin(0x30)       // First time using RAII syntax, yay!@!1!
-    , m_TestSpeed(0x20)
-    , m_TestMax(0x50)
-    , m_TestMaxValues(200)
-{}
+SceneMain::SceneMain() {}
 SceneMain::~SceneMain()
 {
     SceneMain::free();
@@ -16,7 +11,7 @@ void SceneMain::init()
     SceneMain::free();
 
     SceneMain::m_TestDirection = true;
-    SceneMain::m_Test = m_TestMin;
+    SceneMain::m_Test = (float) m_TestMin;
 }
 
 void SceneMain::free() {}

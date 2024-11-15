@@ -34,11 +34,11 @@ private:
     /// @brief TODO: DELETE ME.
     bool m_TestDirection;
     /// @brief TODO: DELETE ME.
-    const unsigned char m_TestMin;
+    const unsigned char m_TestMin = 0x30;
     /// @brief TODO: DELETE ME.
-    const unsigned char m_TestMax;
+    const unsigned char m_TestMax = 0x50;
     /// @brief TODO: DELETE ME.
-    const unsigned char m_TestSpeed;
+    const unsigned char m_TestSpeed = 0x20;
     /// @brief TODO: DELETE ME.
     float m_Test;
     /// @brief TODO: DELETE ME.
@@ -46,5 +46,5 @@ private:
     /// @brief TODO: DELETE ME.
     std::vector<float> m_TestDirectionValues;
     /// @brief TODO: DELETE ME.
-    const unsigned int m_TestMaxValues;
+    const unsigned int m_TestMaxValues = 1000;
 };
