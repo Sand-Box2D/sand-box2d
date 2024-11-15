@@ -40,7 +40,7 @@ private:
     /// @brief TODO: DELETE ME.
     const unsigned char m_TestSpeed;
     /// @brief TODO: DELETE ME.
-    unsigned char m_Test;
+    float m_Test;
     /// @brief TODO: DELETE ME.
     std::vector<float> m_TestValues;
     /// @brief TODO: DELETE ME.

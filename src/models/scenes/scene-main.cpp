@@ -2,7 +2,7 @@
 
 SceneMain::SceneMain()
     : m_TestMin(0x30)       // First time using RAII syntax, yay!@!1!
-    , m_TestSpeed(0x40)
+    , m_TestSpeed(0x20)
     , m_TestMax(0x50)
     , m_TestMaxValues(200)
 {}
@@ -28,9 +28,9 @@ bool SceneMain::step(
 ) {
     float testStep = SceneMain::m_TestSpeed * r_renderer.getDelta() / 1000.f;
 
-    if (SceneMain::m_Test > SceneMain::m_TestMax)
+    if ((unsigned char) SceneMain::m_Test > SceneMain::m_TestMax)
         SceneMain::m_TestDirection = false;
-    if (SceneMain::m_Test < SceneMain::m_TestMin)
+    if ((unsigned char) SceneMain::m_Test < SceneMain::m_TestMin)
         SceneMain::m_TestDirection = true;
 
     if (SceneMain::m_TestDirection)
@@ -55,7 +55,7 @@ bool SceneMain::step(
     ImGui::Text("framerate = %d FPS", (int)(1.f / (r_renderer.getDelta() / 1000.f)));
     ImGui::Text("SceneMain::m_TestDirection = %d", SceneMain::m_TestDirection);
     ImGui::Text("SceneMain::m_TestSpeed = %d", SceneMain::m_TestSpeed);
-    ImGui::Text("SceneMain::m_Test = %d", SceneMain::m_Test);
+    ImGui::Text("SceneMain::m_Test = %f", SceneMain::m_Test);
     ImGui::PlotLines("m_Test", SceneMain::m_TestValues.data(), SceneMain::m_TestValues.size());
     ImGui::PlotLines(
         "m_TestDirection",
@@ -70,5 +70,5 @@ bool SceneMain::step(
 
 void SceneMain::render(Renderer &r_renderer)
 {
-    r_renderer.clearScreen({0x40, 0x40, SceneMain::m_Test});
+    r_renderer.clearScreen({0x40, 0x40, (unsigned char) SceneMain::m_Test});
 }

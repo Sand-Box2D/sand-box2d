@@ -7,8 +7,11 @@ How do you install dependencies and compile and etc.
 First, let's review list of dependencies that are required for Sand-Box2D to run on PS Vita.
 
 1. **SDL2**. Library responsible for creating a window and a SDL2_renderer inside it.
-2. **Dear ImGui**. Library providing an easy access to draw some windows inside the game.
+2. **Dear ImGui for PS Vita** (OG [`Rinnegatamante/imgui-vita`](https://github.com/Rinnegatamante/imgui-vita)
+but [`sand-box2d/imgui-vita`](https://github.com/sand-box2d/imgui-vita) is used).
+Library providing an easy access to draw some windows inside the game.
 It's an internal lib, meaning that its code is cloned locally and compiled alongside the game.
+Even though ImGui is compiled alongside the game, its backends are not. Meaning that it doesn't simply work.
 
 Note that game is compiled with the Vita SDK tools.
 
