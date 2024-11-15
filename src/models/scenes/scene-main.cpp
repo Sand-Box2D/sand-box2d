@@ -4,6 +4,7 @@ SceneMain::SceneMain()
     : m_TestMin(0x30)       // First time using RAII syntax, yay!@!1!
     , m_TestSpeed(0x40)
     , m_TestMax(0x50)
+    , m_TestMaxValues(200)
 {}
 SceneMain::~SceneMain()
 {
@@ -37,7 +38,32 @@ bool SceneMain::step(
     else
         SceneMain::m_Test -= testStep;
 
-    ImGuiManager::showDemoWindow();
+    SceneMain::m_TestValues.push_back(SceneMain::m_Test);
+    SceneMain::m_TestDirectionValues.push_back(SceneMain::m_TestDirection ? 1 : 0);
+
+    if (SceneMain::m_TestValues.size() > SceneMain::m_TestMaxValues)
+    {
+        SceneMain::m_TestValues.erase(SceneMain::m_TestValues.begin());
+        SceneMain::m_TestDirectionValues.erase(SceneMain::m_TestDirectionValues.begin());
+    }
+
+    ImGui::ShowDemoWindow();
+
+    ImGui::Begin("Debug");
+
+    ImGui::Text("testStep = %f", testStep);
+    ImGui::Text("framerate = %d FPS", (int)(1.f / (r_renderer.getDelta() / 1000.f)));
+    ImGui::Text("SceneMain::m_TestDirection = %d", SceneMain::m_TestDirection);
+    ImGui::Text("SceneMain::m_TestSpeed = %d", SceneMain::m_TestSpeed);
+    ImGui::Text("SceneMain::m_Test = %d", SceneMain::m_Test);
+    ImGui::PlotLines("m_Test", SceneMain::m_TestValues.data(), SceneMain::m_TestValues.size());
+    ImGui::PlotLines(
+        "m_TestDirection",
+        SceneMain::m_TestDirectionValues.data(),
+        SceneMain::m_TestDirectionValues.size()
+    );
+
+    ImGui::End();
 
     return true;
 }

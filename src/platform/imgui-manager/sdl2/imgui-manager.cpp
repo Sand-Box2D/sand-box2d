@@ -47,8 +47,3 @@ void ImGuiManager::render(Renderer &r_renderer)
     ImGui::Render();
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), r_renderer.getRenderer<SDL_Renderer*>());
 }
-
-void ImGuiManager::showDemoWindow(bool *p_open)
-{
-    ImGui::ShowDemoWindow(p_open); // Cool! ImGui does same naming conventions as me! (almost)
-}

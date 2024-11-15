@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "scene.hpp"
 
 #include "platform/imgui-manager/imgui-manager.hpp"
@@ -39,4 +41,10 @@ private:
     const unsigned char m_TestSpeed;
     /// @brief TODO: DELETE ME.
     unsigned char m_Test;
+    /// @brief TODO: DELETE ME.
+    std::vector<float> m_TestValues;
+    /// @brief TODO: DELETE ME.
+    std::vector<float> m_TestDirectionValues;
+    /// @brief TODO: DELETE ME.
+    const unsigned int m_TestMaxValues;
 };
