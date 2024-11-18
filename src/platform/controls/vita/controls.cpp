@@ -19,7 +19,9 @@ void Controls::check()
 
 }
 
-bool Controls::getQuit()
-{
-    return Controls::isQuit;
-}
+bool Controls::getQuit()            { return Controls::isQuit; }
+
+bool Controls::getMenuUp()          { return Controls::isMenuUp; }
+bool Controls::getMenuDown()        { return Controls::isMenuDown; }
+bool Controls::getMenuLeft()        { return Controls::isMenuLeft; }
+bool Controls::getMenuRight()       { return Controls::isMenuRight; }

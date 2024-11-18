@@ -48,10 +48,32 @@ public:
     /// @return True if game has to be closed now.
     bool getQuit();
 
+    /// @brief Does user want to navigate currently open menu to the up?
+    /// @return True if so. False if not.
+    bool getMenuUp();
+    /// @brief Does user want to navigate currently open menu to the down?
+    /// @return True if so. False if not.
+    bool getMenuDown();
+    /// @brief Does user want to navigate currently open menu to the left?
+    /// @return True if so. False if not.
+    bool getMenuLeft();
+    /// @brief Does user want to navigate currently open menu to the right?
+    /// @return True if so. False if not.
+    bool getMenuRight();
+
 private:
     /// @brief Pointer to platform-specific Controls data.
     std::shared_ptr<ControlsSpecific> mp_Specific;
 
     /// @brief State of the action telling game to close.
     bool isQuit = false;
+
+    /// @brief State of the action navigating whatever menu to the up.
+    bool isMenuUp = false;
+    /// @brief State of the action navigating whatever menu to the down.
+    bool isMenuDown = false;
+    /// @brief State of the action navigating whatever menu to the left.
+    bool isMenuLeft = false;
+    /// @brief State of the action navigating whatever menu to the right.
+    bool isMenuRight = false;
 };

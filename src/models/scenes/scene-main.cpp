@@ -46,17 +46,28 @@ bool SceneMain::step(
 
     ImGui::Begin("Debug");
 
-    ImGui::Text("testStep = %f", testStep);
-    ImGui::Text("framerate = %d FPS", (int)(1.f / (r_renderer.getDelta() / 1000.f)));
-    ImGui::Text("SceneMain::m_TestDirection = %d", SceneMain::m_TestDirection);
     ImGui::Text("SceneMain::m_TestSpeed = %d", SceneMain::m_TestSpeed);
+    ImGui::Text("testStep = %f", testStep);
+    ImGui::Text("frameRate = %d FPS", (int)(1.f / (r_renderer.getDelta() / 1000.f)));
+    ImGui::Text("SceneMain::m_TestDirection = %d", SceneMain::m_TestDirection);
     ImGui::Text("SceneMain::m_Test = %f", SceneMain::m_Test);
-    ImGui::PlotLines("m_Test", SceneMain::m_TestValues.data(), SceneMain::m_TestValues.size());
+    ImGui::PlotLines(
+        "m_Test",
+        SceneMain::m_TestValues.data(),
+        SceneMain::m_TestValues.size()
+    );
     ImGui::PlotLines(
         "m_TestDirection",
         SceneMain::m_TestDirectionValues.data(),
         SceneMain::m_TestDirectionValues.size()
     );
+
+    ImGui::Separator();
+
+    ImGui::Text("r_controls.getMenuUp() = %d", r_controls.getMenuUp());
+    ImGui::Text("r_controls.getMenuDown() = %d", r_controls.getMenuDown());
+    ImGui::Text("r_controls.getMenuLeft() = %d", r_controls.getMenuLeft());
+    ImGui::Text("r_controls.getMenuRight() = %d", r_controls.getMenuRight());
 
     ImGui::End();
 
