@@ -41,7 +41,7 @@ git submodule update --init --depth=1
 ```bash
 mkdir build
 cd build
-cmake .. -DBUILD_WINDOWS=OFF -DBUILD_VITA=ON -Wno-deprecated
+cmake .. -DBUILD_VITA=ON -Wno-deprecated
 make -j4
 ```
 

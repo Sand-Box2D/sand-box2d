@@ -40,7 +40,7 @@ git submodule update --init --depth=1
 ```bash
 mkdir build
 cd build
-cmake .. -DBUILD_WINDOWS=OFF -DBUILD_LINUX=ON
+cmake .. -DBUILD_LINUX=ON
 make -j4
 ```
 

@@ -47,7 +47,7 @@ git submodule update --init --depth=1
 ```bash
 mkdir build
 cd build
-cmake .. -G "MinGW Makefiles"
+cmake .. -DBUILD_WINDOWS=ON -G "MinGW Makefiles"
 make -j4
 ```
 

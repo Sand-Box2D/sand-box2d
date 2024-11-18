@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-option(BUILD_WINDOWS "Build Windows .exe" ON)
+option(BUILD_WINDOWS "Build Windows .exe" OFF)
 option(BUILD_LINUX "Build Linux executable" OFF)
 option(BUILD_MACOS "Build macOS executable" OFF)
 option(BUILD_VITA "Build PS Vita .vpk" OFF)

@@ -37,7 +37,7 @@ git submodule update --init --depth=1
 ```bash
 mkdir build
 cd build
-cmake .. -DBUILD_WINDOWS=OFF -DBUILD_MACOS=ON
+cmake .. -DBUILD_MACOS=ON
 make -j4
 ```
 
