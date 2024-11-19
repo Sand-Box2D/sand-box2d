@@ -12,6 +12,8 @@ void SceneMain::init()
 
     SceneMain::m_TestDirection = true;
     SceneMain::m_Test = (float) m_TestMin;
+
+    SceneMain::just_inited = true;
 }
 
 void SceneMain::free() {}
@@ -21,6 +23,17 @@ bool SceneMain::step(
     Controls &r_controls,
     Controls &r_old_controls
 ) {
+    if (!r_controls.getMenuRight() && r_old_controls.getMenuRight() && !just_inited)
+    {
+        SceneMain::m_NextScene = { SCENE_TEST_ONE, false };
+        return false;
+    }
+    if (!r_controls.getMenuLeft() && r_old_controls.getMenuLeft() && !just_inited)
+    {
+        SceneMain::m_NextScene = { SCENE_TEST_TWO, false };
+        return false;
+    }
+
     float testStep = SceneMain::m_TestSpeed * r_renderer.getDelta() / 1000.f;
 
     if ((unsigned char) SceneMain::m_Test > SceneMain::m_TestMax)
@@ -69,7 +82,13 @@ bool SceneMain::step(
     ImGui::Text("r_controls.getMenuLeft() = %d", r_controls.getMenuLeft());
     ImGui::Text("r_controls.getMenuRight() = %d", r_controls.getMenuRight());
 
+    ImGui::Separator();
+
+    ImGui::Text("Cliclking MenuLeft and MenuRight will switch between 3 scenes.");
+
     ImGui::End();
+
+    SceneMain::just_inited = false;
 
     return true;
 }

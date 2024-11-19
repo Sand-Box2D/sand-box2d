@@ -8,7 +8,9 @@
 /// @brief Enum describing which scene should be shown now.
 enum CurrentScene
 {
-    SCENE_MAIN = 0                  // Scene of the main menu. `SceneMain`.
+    SCENE_MAIN = 0,         // Scene of the main menu, `SceneMain`.
+    SCENE_TEST_ONE,         // Scene of test 1, `SceneTestOne`.
+    SCENE_TEST_TWO,         // Scene of test 2, `SceneTestTwo`.
 };
 
 /// @brief Struct containing info about what scene should be the next.

@@ -1,4 +1,4 @@
-/// @brief This provides an implementation of a scene, `SceneMain`.
+/// @brief This provides an implementation of a scene, `SceneTestTwo`.
 
 #pragma once
 
@@ -9,16 +9,13 @@
 #include "platform/imgui-manager/imgui-manager.hpp"
 
 /**
- * @brief Main Menu Scene.
- * 
- * Shows the main menu where you can select other game scenes
- * and also "play with our logo".
+ * @brief test1.
  */
-class SceneMain : public IScene
+class SceneTestTwo : public IScene
 {
 public:
-    SceneMain();
-    ~SceneMain();
+    SceneTestTwo();
+    ~SceneTestTwo();
 
     virtual void init() override;
     virtual void free() override;
@@ -41,12 +38,6 @@ private:
     const unsigned char m_TestSpeed = 0x20;
     /// @brief TODO: DELETE ME.
     float m_Test;
-    /// @brief TODO: DELETE ME.
-    std::vector<float> m_TestValues;
-    /// @brief TODO: DELETE ME.
-    std::vector<float> m_TestDirectionValues;
-    /// @brief TODO: DELETE ME.
-    const unsigned int m_TestMaxValues = 1000;
     /// @brief TODO: DELETE ME.
     bool just_inited = true;
 };
