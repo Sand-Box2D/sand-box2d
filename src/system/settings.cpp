@@ -3,22 +3,22 @@
 Settings::~Settings() {}
 Settings::Settings() {}
 
-void Settings::init(std::string path_to_settings, std::string path_to_def_settings)
+void Settings::init(std::string pathToSettings, std::string pathToDefSettings)
 {
     Settings::m_Settings = Json::Value();
     Settings::m_DefaultSettings = Json::Value();
 
-    if (path_to_settings != "")
+    if (pathToSettings != "")
     {
-        Settings::m_PathToSettings = path_to_settings;
+        Settings::m_PathToSettings = pathToSettings;
 
         std::ifstream ifs(Settings::m_PathToSettings);
         Json::Reader reader;
         reader.parse(ifs, Settings::m_Settings);
     }
-    if (path_to_def_settings != "")
+    if (pathToDefSettings != "")
     {
-        std::ifstream ifs(path_to_def_settings);
+        std::ifstream ifs(pathToDefSettings);
         Json::Reader reader;
         reader.parse(ifs, Settings::m_DefaultSettings);
     }

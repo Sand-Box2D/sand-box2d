@@ -35,11 +35,11 @@ public:
     /// At every `set()` call will write updated parameter to file if it's successfully loaded.
     /// Will also call `set()` when setting default value to
     /// parameter which was requested through `get()` and doesn't have value.
-    /// @param path_to_settings path to the JSON where user settings are stored.
+    /// @param pathToSettings path to the JSON where user settings are stored.
     /// If doesn't exist - it'll create it. If leave empty, settings affect only the current session.
-    /// @param path_to_def_settings path to the JSON where default settings are stored.
+    /// @param pathToDefSettings path to the JSON where default settings are stored.
     /// If leave empty, all default settings will be considered as 0.
-    void init(std::string path_to_settings = "", std::string path_to_def_settings = "");
+    void init(std::string pathToSettings = "", std::string pathToDefSettings = "");
 
     /// @brief Set some value at the settings.
     /// Will affect current session and write it to the file if it's loaded.

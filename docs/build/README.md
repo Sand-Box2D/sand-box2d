@@ -18,7 +18,7 @@ This list contains more info regarding each platform to navigate quickly.
 This project is "Vita-first" because originally
 it's been developing as a game for PS Vita only with additional PC build for dev.
 
-Nowadays, PC build is officially supported and default build is for [Windows](#windows).
+Nowadays, PC build is officially supported and we support Windows, Linux and macOS.
 
 As this game is still "Vita-first", UI should be tested on PS Vita resolution first.
 Then there should be tests for adapting to other resolutions.
@@ -34,8 +34,6 @@ Read more [here](./vita.md).
 * Build option: `BUILD_WINDOWS`.
 * Build doc: [`windows.md`](./windows.md).
 * Settings file: `windows.json`.
-
-The default build option in CMake.
 
 Build is performed with MSYS2 UCRT64 tools.
 Read more [here](./windows.md).

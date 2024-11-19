@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "platform/renderer/renderer.hpp"
 #include "platform/controls/controls.hpp"
 #include "platform/imgui-manager/imgui-manager.hpp"
@@ -21,7 +23,12 @@
 class GameManager
 {
 public:
-    GameManager();
+    /// @brief Init all the game systems.
+    /// @param pathToSettings path to the JSON where user settings are stored.
+    /// If doesn't exist - it'll create it. If leave empty, settings affect only the current session.
+    /// @param pathToDefSettings path to the JSON where default settings are stored.
+    /// If leave empty, all default settings will be considered as 0.
+    GameManager(std::string pathToSettings = "", std::string pathToDefSettings = "");
     ~GameManager();
 
     /// @brief Make a logical step of the game.

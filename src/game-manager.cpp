@@ -1,11 +1,21 @@
 #include "game-manager.hpp"
 
-GameManager::GameManager()
+GameManager::GameManager(std::string pathToSettings, std::string pathToDefSettings)
 {
-    // load settings...
     GameManager::m_SceneManager.init(SCENE_MAIN);
 
-    GameManager::m_Renderer.init({1, RR_MODE_WINDOW, 960, 544});
+    GameManager::m_Settings.init(pathToSettings, pathToDefSettings);
+
+    const float scale = 1;
+
+    GameManager::m_Renderer.init({
+        scale,
+        GameManager::m_Settings.get("screen-mode").asString() == "window"
+            ? RR_MODE_WINDOW
+            : RR_MODE_FULLSCREEN_SOFT,
+        GameManager::m_Settings.get("screen-width").asInt(),
+        GameManager::m_Settings.get("screen-height").asInt(),
+    });
 
     GameManager::m_ImGuiManager.init(GameManager::m_Renderer);
 }
