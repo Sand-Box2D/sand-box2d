@@ -56,14 +56,23 @@ if(BUILD_WINDOWS)
 
     find_package(SDL2)
 
+    find_package(PkgConfig)
+    pkg_check_modules(JSONCPP jsoncpp IMPORTED_TARGET GLOBAL)
+
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         "${SRC_DIR}"
+
         "${IMGUI_DIR}"
+
         "${SDL2_INCLUDE_DIRS}"
+
+        "${JSONCPP_INCLUDE_DIRS}"
     )
 
     target_link_libraries(${CMAKE_PROJECT_NAME}
         SDL2::SDL2
+
+        PkgConfig::JSONCPP
     )
 
     file(COPY assets DESTINATION .)
@@ -103,14 +112,23 @@ elseif(BUILD_LINUX)
 
     find_package(SDL2)
 
+    find_package(PkgConfig)
+    pkg_check_modules(JSONCPP jsoncpp IMPORTED_TARGET GLOBAL)
+
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         "${SRC_DIR}"
+
         "${IMGUI_DIR}"
+
         "${SDL2_INCLUDE_DIRS}"
+
+        "${JSONCPP_INCLUDE_DIRS}"
     )
 
     target_link_libraries(${CMAKE_PROJECT_NAME}
         SDL2
+
+        PkgConfig::JSONCPP
     )
 
     file(COPY assets DESTINATION .)
@@ -150,14 +168,23 @@ elseif(BUILD_MACOS)
 
     find_package(SDL2)
 
+    find_package(PkgConfig)
+    pkg_check_modules(JSONCPP jsoncpp IMPORTED_TARGET GLOBAL)
+
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         "${SRC_DIR}"
+
         "${IMGUI_DIR}"
+
         "${SDL2_INCLUDE_DIRS}"
+
+        "${JSONCPP_INCLUDE_DIRS}"
     )
 
     target_link_libraries(${CMAKE_PROJECT_NAME}
         SDL2::SDL2
+
+        PkgConfig::JSONCPP
     )
 
     file(COPY assets DESTINATION .)
@@ -212,13 +239,21 @@ elseif(BUILD_VITA)
 
     find_package(SDL2)
 
+    find_package(PkgConfig)
+    pkg_check_modules(JSONCPP jsoncpp IMPORTED_TARGET GLOBAL)
+
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         "${SRC_DIR}"
+
         "${SDL2_INCLUDE_DIRS}"
+
+        "${JSONCPP_INCLUDE_DIRS}"
     )
 
     target_link_libraries(${CMAKE_PROJECT_NAME}
         SDL2::SDL2
+
+        PkgConfig::JSONCPP
     )
 
     vita_create_self(${CMAKE_PROJECT_NAME}.self ${CMAKE_PROJECT_NAME})

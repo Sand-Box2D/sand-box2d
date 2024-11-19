@@ -7,6 +7,7 @@
 #include "platform/imgui-manager/imgui-manager.hpp"
 
 #include "system/scene-manager.hpp"
+#include "system/settings.hpp"
 
 /**
  * @brief GameManager is the principal class of the game. It manages all.
@@ -35,6 +36,12 @@ public:
     void render();
 
 private:
+    /// @brief Settings (manager) of the game.
+    ///
+    /// This object lets us save some parameters
+    /// and define their default values for different platforms.
+    Settings m_Settings;
+
     /// @brief Renderer of the game.
     ///
     /// Renderer is a class which represents basic renderer functions.

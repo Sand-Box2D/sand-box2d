@@ -6,8 +6,9 @@ How do you install dependencies and compile and etc.
 ## Dependencies
 First, let's review list of dependencies that are required for Sand-Box2D to run on macOS.
 
-1. **SDL2**. Library responsible for creating a window and a SDL2_renderer inside it.
-2. **Dear ImGui** ([`ocornut/imgui`](https://github.com/ocornut/imgui)).
+- **SDL2**. Library responsible for creating a window and a SDL2_renderer inside it.
+- **JsonCpp**. Library letting C++ to understand JSON. It's used to store settings and levels.
+- **Dear ImGui** ([`ocornut/imgui`](https://github.com/ocornut/imgui)).
 Library providing an easy access to draw some windows inside the game.
 It's an internal lib, meaning that its code is cloned locally and compiled alongside the game.
 
@@ -20,7 +21,7 @@ Let's prepare our dev environment by installing all the tools we need.
 Apple's dev tools (Clang compiler and Git).
 2. Install CMake and dependencies with Brew:
 ```bash
-brew install cmake sdl2
+brew install cmake sdl2 jsoncpp
 ```
 
 ## Compile
