@@ -10,7 +10,7 @@ jobs:
   #   name: Windows
   #   runs-on: windows-latest
   #   steps:
-  #     - uses: actions/checkout@v3
+  #     - uses: actions/checkout
 
   #     - uses: Install dependencies
   #       run: |
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout
 
       - name: Install dependencies
         run: |
@@ -38,7 +38,7 @@ jobs:
           make -j4
 
       - name: Output build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact
         with:
           name: Linux executable
           path: |
