@@ -33,7 +33,7 @@ jobs:
         with:
           name: sb2d-windows
           path: |
-            sand-box2d/build/Sand-Box2D
+            sand-box2d/build/Sand-Box2D.exe
             sand-box2d/build/assets
 
   build-linux:
