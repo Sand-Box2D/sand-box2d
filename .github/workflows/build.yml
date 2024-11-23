@@ -6,6 +6,38 @@ env:
   VITASDK: /usr/local/vitasdk
 
 jobs:
+  build-windows:
+    name: Windows
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Install dependencies
+        run: |
+          yes "" | pacman -S mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-SDL2 mingw-w64-ucrt-x86_64-jsoncpp
+          ln -s /ucrt64/bin/mingw32-make.exe /ucrt64/bin/make.exe
+
+      - name: Build project
+        run: |
+          git clone https://github.com/sand-box2d/sand-box2d
+          cd sand-box2d
+          git submodule update --init --depth=1
+          mkdir build
+          cd build
+          cmake .. -DBUILD_WINDOWS=ON -G "MinGW Makefiles"
+          make -j4
+
+      - name: Output build
+        uses: actions/upload-artifact@v4
+        with:
+          name: sb2d-windows
+          path: |
+            sand-box2d/build/Sand-Box2D
+            sand-box2d/build/assets
+
   build-linux:
     name: Linux
     runs-on: ubuntu-latest
@@ -71,7 +103,7 @@ jobs:
         run: |
           git clone https://github.com/vitasdk/vdpm
           cd vdpm
-          ./bootstrap-vitasdk.sh
+          ./bootstrap-vitasdk.sh > /dev/null
           ./install-all.sh
 
       - name: Build project
