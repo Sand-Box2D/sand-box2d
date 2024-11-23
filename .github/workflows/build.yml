@@ -1,9 +1,6 @@
-name: CMake
+name: Build Sand-Box2D
 
 on: [push, pull_request]
-
-env:
-  VITASDK: /usr/local/vitasdk
 
 jobs:
   build-windows:
@@ -12,13 +9,14 @@ jobs:
 
     defaults:
       run:
-        shell: bash
+        shell: msys2 {0}
 
     steps:
-      - name: Install dependencies
-        run: |
-          yes "" | pacman -S mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-SDL2 mingw-w64-ucrt-x86_64-jsoncpp
-          ln -s /ucrt64/bin/mingw32-make.exe /ucrt64/bin/make.exe
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-SDL2 mingw-w64-ucrt-x86_64-jsoncpp
 
       - name: Build project
         run: |
@@ -28,7 +26,7 @@ jobs:
           mkdir build
           cd build
           cmake .. -DBUILD_WINDOWS=ON -G "MinGW Makefiles"
-          make -j4
+          mingw32-make -j4
 
       - name: Output build
         uses: actions/upload-artifact@v4
@@ -96,6 +94,9 @@ jobs:
   build-vita:
     name: PS Vita
     runs-on: ubuntu-latest
+
+    env:
+      VITASDK: /usr/local/vitasdk
 
     steps:
       - name: Install Vita SDK
