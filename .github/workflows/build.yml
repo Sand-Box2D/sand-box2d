@@ -40,7 +40,7 @@ jobs:
       - name: Output build
         uses: actions/upload-artifact@v4
         with:
-          name: Linux executable
+          name: sb2d-linux
           path: |
             sand-box2d/build/Sand-Box2D
             sand-box2d/build/assets
@@ -54,7 +54,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew install git gcc make cmake sdl2 jsoncpp
+          brew install make sdl2 jsoncpp
 
       - name: Build project
         run: |
@@ -69,7 +69,7 @@ jobs:
       - name: Output build
         uses: actions/upload-artifact@v4
         with:
-          name: macOS executable
+          name: sb2d-macos
           path: |
             sand-box2d/build/Sand-Box2D
             sand-box2d/build/assets
