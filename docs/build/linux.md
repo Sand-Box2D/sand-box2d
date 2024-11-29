@@ -19,12 +19,15 @@ Let's prepare our dev environment by installing all the tools we need.
 
 1. Install Git, GCC, Make, CMake and dependencies with your package manager
 (adapt your command, these are some test commands or their parts that could be useful):
-```
+```bash
+# Debian-ish...
 sudo apt install git gcc make cmake libsdl2-dev libjsoncpp-dev
 
-...
+# Fedor-ish...
+sudo dnf install git gcc make cmake SDL2-devel jsoncpp-devel
 
-git gcc make cmake sdl2 jsoncpp
+# Arch-ish...
+sudo pacman -S git gcc make cmake sdl2 jsoncpp
 ```
 
 ## Compile

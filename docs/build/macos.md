@@ -19,7 +19,7 @@ Let's prepare our dev environment by installing all the tools we need.
 
 1. Ensure you have [Brew](https://brew.sh) installed as well as
 Apple's dev tools (Clang compiler and Git).
-2. Install CMake and dependencies with Brew:
+2. Install CMake and external dependencies with Brew:
 ```bash
 brew install cmake sdl2 jsoncpp
 ```

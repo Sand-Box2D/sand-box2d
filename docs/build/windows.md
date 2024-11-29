@@ -21,7 +21,7 @@ Let's prepare our dev environment by installing all the tools we need.
 1. Ensure you have [Git](https://www.git-scm.com/download/win) installed.
 2. Download [MSYS2](https://www.msys2.org/) and launch it. Type in the appeared terminal:
 ```bash
-# Install C++ compiler, CMake and dependencies
+# Install C++ compiler, CMake and external dependencies
 yes "" | pacman -S mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-SDL2 mingw-w64-ucrt-x86_64-jsoncpp
 
 # Link mingw32-make to simply make
