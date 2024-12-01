@@ -37,6 +37,7 @@ With all the needed tools installed, we can compile the game.
 ```bash
 git clone https://github.com/sand-box2d/sand-box2d
 cd sand-box2d
+
 git submodule update --init --depth=1
 ```
 
@@ -44,7 +45,20 @@ git submodule update --init --depth=1
 ```bash
 mkdir build
 cd build
+
 cmake .. -DBUILD_LINUX=ON
+make -j4
+```
+
+> [!NOTE]
+> If you are using an IDE that looks for a file named `build/compile_commands.json`,
+> you would use these commands instead:
+
+```bash
+mkdir build
+cd build
+
+cmake .. -DBUILD_LINUX=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 make -j4
 ```
 

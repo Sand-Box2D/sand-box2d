@@ -10,10 +10,13 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+# Build destinations
 /build
 build-*
 
+# IDE data
 .vscode
+.cache
 
 # Apple why you do that to me
 .DS_Store
