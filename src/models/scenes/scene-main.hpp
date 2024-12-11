@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include <vector>
+#include <vector> // IWYU pragma: export
 
 #include "scene.hpp"
 
-#include "platform/imgui-manager/imgui-manager.hpp"
+#include "platform/imgui-manager/imgui-manager.hpp" // IWYU pragma: export
 
 /**
  * @brief Main Menu Scene.

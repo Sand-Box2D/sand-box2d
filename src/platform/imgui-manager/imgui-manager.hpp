@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "imgui.h"
+#include "imgui.h" // IWYU pragma: export
 
 #include "platform/renderer/renderer.hpp"
 

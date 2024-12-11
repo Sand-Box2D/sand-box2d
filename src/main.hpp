@@ -1,9 +1,12 @@
 /// @brief The main header that includes the game manager
 /// and defines platform-agnostic settings paths.
+///
+/// "IWYU pragma: export" means that this include won't be used directly
+/// and IDE has to stop giving warnings about it.
 
 #pragma once
 
-#include "game-manager.hpp"
+#include "game-manager.hpp" // IWYU pragma: export
 
 #if defined(BUILD_WINDOWS)
     #define PATH_TO_SETTINGS "./settings.json"

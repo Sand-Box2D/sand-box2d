@@ -4,8 +4,8 @@
 
 #include <json/json.h>
 
-#include <iostream>
-#include <fstream>
+#include <iostream> // IWYU pragma: export
+#include <fstream> // IWYU pragma: export
 #include <string>
 
 /**
