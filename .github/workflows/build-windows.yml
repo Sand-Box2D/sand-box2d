@@ -1,0 +1,38 @@
+name: Build Sand-Box2D for Windows
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - name: Install dependencies
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: git mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-SDL2 mingw-w64-ucrt-x86_64-jsoncpp
+
+      - name: Build project
+        run: |
+          git clone https://github.com/sand-box2d/sand-box2d
+          cd sand-box2d
+          git submodule update --init --depth=1
+          mkdir build
+          cd build
+          cmake .. -DBUILD_WINDOWS=ON -G "MinGW Makefiles"
+          mingw32-make -j4
+
+      - name: Output build
+        uses: actions/upload-artifact@v4
+        with:
+          name: sb2d-windows
+          path: |
+            sand-box2d/build/Sand-Box2D.exe
+            sand-box2d/build/assets

@@ -12,7 +12,7 @@ _deps
 
 # Build destinations
 /build
-build-*
+/build-*
 
 # IDE data
 .vscode

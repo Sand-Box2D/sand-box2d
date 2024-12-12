@@ -1,0 +1,37 @@
+name: Build Sand-Box2D for PS Vita
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    env:
+      VITASDK: /usr/local/vitasdk
+
+    steps:
+      - name: Install Vita SDK
+        continue-on-error: true
+        run: |
+          git clone https://github.com/vitasdk/vdpm
+          cd vdpm
+          ./bootstrap-vitasdk.sh > /dev/null
+          ./install-all.sh
+
+      - name: Build project
+        run: |
+          git clone https://github.com/sand-box2d/sand-box2d
+          cd sand-box2d
+          git submodule update --init --depth=1
+          mkdir build
+          cd build
+          cmake .. -DBUILD_VITA=ON -Wno-deprecated
+          make -j4
+
+      - name: Output build
+        uses: actions/upload-artifact@v4
+        with:
+          name: sb2d-vita
+          path: |
+            sand-box2d/build/*.vpk
