@@ -1,10 +1,10 @@
-name: Build Sand-Box2D for macOS
+name: macOS
 
 on: [push, pull_request]
 
 jobs:
   build:
-    name: Build
+    name: Build for macOS
     runs-on: macos-latest
 
     steps:
